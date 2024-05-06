@@ -6,23 +6,32 @@ import java.time.LocalDateTime;
 public class Post {
     private int id;
 
-    private int animal_id;
-    private int user_id;
+    private int animalId;
+    private int userId;
     private String url;
     private String description;
 
     private LocalDateTime dateTime;
+    private int locationId;
+    private String gender;
+
+    private int size;
     private boolean found;
 
-    public Post(int id, int animal_id, int user_id, String url, String description, LocalDateTime dateTime, boolean found) {
+    public Post(int id, int animalId, int userId, String url, String description, LocalDateTime dateTime, int locationId, String gender, int size, boolean found) {
         this.id = id;
-        this.animal_id = animal_id;
-        this.user_id = user_id;
+        this.animalId = animalId;
+        this.userId = userId;
         this.url = url;
         this.description = description;
         this.dateTime = dateTime;
+        this.locationId = locationId;
+        this.gender = gender;
+        this.size = size;
         this.found = found;
     }
+
+
     public Post() {
 
     }
@@ -35,20 +44,20 @@ public class Post {
         this.id = id;
     }
 
-    public int getAnimal_id() {
-        return animal_id;
+    public int getAnimalId() {
+        return animalId;
     }
 
-    public void setAnimal_id(int animal_id) {
-        this.animal_id = animal_id;
+    public void setAnimalId(int animalId) {
+        this.animalId = animalId;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getUrl() {
@@ -81,5 +90,29 @@ public class Post {
 
     public void setFound(boolean found) {
         this.found = found;
+    }
+
+    public int getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 }

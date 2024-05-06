@@ -1,14 +1,14 @@
 package learn.lostandfound.models;
 
 public class Animal {
-    private int animal_id;
+    private int animalId;
     private String name;
     private String characteristic;
     private String animal;
     private String breed;
 
     public Animal(int animal_id, String name, String characteristic, String animal, String breed) {
-        this.animal_id = animal_id;
+        this.animalId = animal_id;
         this.name = name;
         this.characteristic = characteristic;
         this.animal = animal;
@@ -16,12 +16,12 @@ public class Animal {
     }
     public Animal() {}
 
-    public int getAnimal_id() {
-        return animal_id;
+    public int getAnimalId() {
+        return animalId;
     }
 
-    public void setAnimal_id(int animal_id) {
-        this.animal_id = animal_id;
+    public void setAnimalId(int animalId) {
+        this.animalId = animalId;
     }
 
     public String getName() {

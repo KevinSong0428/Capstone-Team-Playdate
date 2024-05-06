@@ -1,27 +1,27 @@
 package learn.lostandfound.models;
 
 public class Location {
-    private int location_id;
+    private int locationId;
     private String address;
     private String city;
     private String state;
-    private String zip_code;
+    private String zipCode;
 
-    public Location(int location_id, String address, String city, String state, String zip_code) {
-        this.location_id = location_id;
+    public Location(int locationId, String address, String city, String state, String zipCode) {
+        this.locationId = locationId;
         this.address = address;
         this.city = city;
         this.state = state;
-        this.zip_code = zip_code;
+        this.zipCode = zipCode;
     }
     public Location() {}
 
-    public int getLocation_id() {
-        return location_id;
+    public int getLocationId() {
+        return locationId;
     }
 
     public void setLocation_id(int location_id) {
-        this.location_id = location_id;
+        this.locationId = location_id;
     }
 
     public String getAddress() {
@@ -48,11 +48,11 @@ public class Location {
         this.state = state;
     }
 
-    public String getZip_code() {
-        return zip_code;
+    public String getZipCode() {
+        return zipCode;
     }
 
-    public void setZip_code(String zip_code) {
-        this.zip_code = zip_code;
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 }
