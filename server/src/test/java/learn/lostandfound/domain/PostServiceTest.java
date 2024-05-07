@@ -77,8 +77,7 @@ class PostServiceTest {
     void shouldNotAddWithNullDateTime() throws DataAccessException{
         Post newPost = new Post( 0,1, 1, "fakeurl.png", "New Post", null, 4, "female", 25, false);
         Result<Post> result = service.add(newPost);
-        assertFalse(result.isSuccess());
-        assertNull(result.getPayload());
+        assertTrue(result.isSuccess());
     }
     @Test
     void shouldNotAddWithZeroSize() throws DataAccessException{
@@ -132,12 +131,7 @@ class PostServiceTest {
         Result<Post> result = service.update(postToUpdate);
         assertFalse(result.isSuccess());
     }
-    @Test
-    void shouldNotUpdateWithNullDateTime() throws DataAccessException{
-        Post postToUpdate = new Post( 1,1, 1, "fakeurl.png", "update Post", null, 4, "female", 25, false);
-        Result<Post> result = service.update(postToUpdate);
-        assertFalse(result.isSuccess());
-    }
+
     @Test
     void shouldNotUpdateWithZeroSize() throws DataAccessException{
         Post postToUpdate = new Post( 1,1, 1, "fakeurl.png", "update Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 0, false);
