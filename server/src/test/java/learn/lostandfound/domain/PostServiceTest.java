@@ -2,7 +2,9 @@ package learn.lostandfound.domain;
 
 import learn.lostandfound.data.DataAccessException;
 import learn.lostandfound.data.PostJdbcTemplateRepositoryDouble;
+import learn.lostandfound.models.Animal;
 import learn.lostandfound.models.Post;
+import learn.lostandfound.models.User;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -33,7 +35,9 @@ class PostServiceTest {
     }
     @Test
     void shouldAdd() throws DataAccessException{
-       Post newPost = new Post( 0,1, 1, "fakeurl.png", "New Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
+        Animal animal = new Animal(1, "", "DESC", "ANIMAL", "BREED");
+        User user = new User(1, "Name", "Email", "Phone");
+        Post newPost = new Post( 0,animal, user, "fakeurl.png", "New Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
         Result<Post> result = service.add(newPost);
         assertTrue(result.isSuccess());
         assertNotNull(result.getPayload());
@@ -47,41 +51,53 @@ class PostServiceTest {
     }
     @Test
     void shouldNotAddWithZeroAnimalId() throws DataAccessException {
-        Post newPost = new Post( 0,0, 1, "fakeurl.png", "New Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
+        Animal animal = new Animal(0, "", "DESC", "ANIMAL", "BREED");
+        User user = new User(1, "Name", "Email", "Phone");
+        Post newPost = new Post( 0,animal, user, "fakeurl.png", "New Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
         Result<Post> result = service.add(newPost);
         assertFalse(result.isSuccess());
         assertNull(result.getPayload());
     }
     @Test
     void shouldNotAddWithZeroUserId() throws DataAccessException {
-        Post newPost = new Post( 0,1, 0, "fakeurl.png", "New Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
+        Animal animal = new Animal(1, "", "DESC", "ANIMAL", "BREED");
+        User user = new User(0, "Name", "Email", "Phone");
+        Post newPost = new Post( 0,animal, user, "fakeurl.png", "New Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
         Result<Post> result = service.add(newPost);
         assertFalse(result.isSuccess());
         assertNull(result.getPayload());
     }
     @Test
     void shouldNotAddWithNullUrl() throws DataAccessException{
-        Post newPost = new Post( 0,1, 1, null, "New Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
+        Animal animal = new Animal(1, "", "DESC", "ANIMAL", "BREED");
+        User user = new User(1, "Name", "Email", "Phone");
+        Post newPost = new Post( 0,animal, user, null, "New Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
         Result<Post> result = service.add(newPost);
         assertFalse(result.isSuccess());
         assertNull(result.getPayload());
     }
     @Test
     void shouldNotAddWithEmptyUrl() throws DataAccessException{
-        Post newPost = new Post( 0,1, 1, "", "New Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
+        Animal animal = new Animal(1, "", "DESC", "ANIMAL", "BREED");
+        User user = new User(1, "Name", "Email", "Phone");
+        Post newPost = new Post( 0,animal, user, "", "New Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
         Result<Post> result = service.add(newPost);
         assertFalse(result.isSuccess());
         assertNull(result.getPayload());
     }
     @Test
     void shouldNotAddWithNullDateTime() throws DataAccessException{
-        Post newPost = new Post( 0,1, 1, "fakeurl.png", "New Post", null, 4, "female", 25, false);
+        Animal animal = new Animal(1, "", "DESC", "ANIMAL", "BREED");
+        User user = new User(1, "Name", "Email", "Phone");
+        Post newPost = new Post( 0,animal, user, "fakeurl.png", "New Post", null, 4, "female", 25, false);
         Result<Post> result = service.add(newPost);
         assertTrue(result.isSuccess());
     }
     @Test
     void shouldNotAddWithZeroSize() throws DataAccessException{
-        Post newPost = new Post( 0,1, 1, "fakeurl.png", "New Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 0, false);
+        Animal animal = new Animal(1, "", "DESC", "ANIMAL", "BREED");
+        User user = new User(1, "Name", "Email", "Phone");
+        Post newPost = new Post( 0,animal, user, "fakeurl.png", "New Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 0, false);
         Result<Post> result = service.add(newPost);
         assertFalse(result.isSuccess());
         assertNull(result.getPayload());
@@ -90,51 +106,67 @@ class PostServiceTest {
 
     @Test
     void shouldUpdate() throws DataAccessException{
-        Post postToUpdate = new Post( 1,1, 1, "fakeurl.png", "update Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
+        Animal animal = new Animal(1, "", "DESC", "ANIMAL", "BREED");
+        User user = new User(1, "Name", "Email", "Phone");
+        Post postToUpdate = new Post( 1,animal, user, "fakeurl.png", "update Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
         Result<Post> result = service.update(postToUpdate);
         assertTrue(result.isSuccess());
         System.out.println(result.getPayload());
     }
     @Test
     void shouldNotUpdateWithZeroAnimalId() throws DataAccessException{
-        Post postToUpdate = new Post( 1,0, 1, "fakeurl.png", "update Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
+        Animal animal = new Animal(0, "", "DESC", "ANIMAL", "BREED");
+        User user = new User(1, "Name", "Email", "Phone");
+        Post postToUpdate = new Post( 1,animal, user, "fakeurl.png", "update Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
         Result<Post> result = service.update(postToUpdate);
         assertFalse(result.isSuccess());
     }
     @Test
     void shouldNotUpdateWithZeroUserId() throws DataAccessException{
-        Post postToUpdate = new Post( 1,1, 0, "fakeurl.png", "update Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
+        Animal animal = new Animal(1, "", "DESC", "ANIMAL", "BREED");
+        User user = new User(0, "Name", "Email", "Phone");
+        Post postToUpdate = new Post( 1,animal, user, "fakeurl.png", "update Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
         Result<Post> result = service.update(postToUpdate);
         assertFalse(result.isSuccess());
     }
     @Test
     void shouldNotUpdateWithNullUrl() throws DataAccessException{
-        Post postToUpdate = new Post( 1,1, 1, null, "update Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
+        Animal animal = new Animal(1, "", "DESC", "ANIMAL", "BREED");
+        User user = new User(1, "Name", "Email", "Phone");
+        Post postToUpdate = new Post( 1,animal, user, null, "update Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
         Result<Post> result = service.update(postToUpdate);
         assertFalse(result.isSuccess());
     }
     @Test
     void shouldNotUpdateWithEmptyUrl() throws DataAccessException{
-        Post postToUpdate = new Post( 1,1, 1, "", "update Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
+        Animal animal = new Animal(1, "", "DESC", "ANIMAL", "BREED");
+        User user = new User(1, "Name", "Email", "Phone");
+        Post postToUpdate = new Post( 1,animal, user, "", "update Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
         Result<Post> result = service.update(postToUpdate);
         assertFalse(result.isSuccess());
     }
     @Test
     void shouldNotUpdateWithNullDescription() throws DataAccessException{
-        Post postToUpdate = new Post( 1,1, 1, "fakeurl.png", null, LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
+        Animal animal = new Animal(1, "", "DESC", "ANIMAL", "BREED");
+        User user = new User(1, "Name", "Email", "Phone");
+        Post postToUpdate = new Post( 1,animal, user, "fakeurl.png", null, LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
         Result<Post> result = service.update(postToUpdate);
         assertFalse(result.isSuccess());
     }
     @Test
     void shouldNotUpdateWithEmptyDescription() throws DataAccessException{
-        Post postToUpdate = new Post( 1,1, 1, "fakeurl.png", "", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
+        Animal animal = new Animal(1, "", "DESC", "ANIMAL", "BREED");
+        User user = new User(1, "Name", "Email", "Phone");
+        Post postToUpdate = new Post( 1,animal, user, "fakeurl.png", "", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 25, false);
         Result<Post> result = service.update(postToUpdate);
         assertFalse(result.isSuccess());
     }
 
     @Test
     void shouldNotUpdateWithZeroSize() throws DataAccessException{
-        Post postToUpdate = new Post( 1,1, 1, "fakeurl.png", "update Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 0, false);
+        Animal animal = new Animal(1, "", "DESC", "ANIMAL", "BREED");
+        User user = new User(1, "Name", "Email", "Phone");
+        Post postToUpdate = new Post( 1,animal, user, "fakeurl.png", "update Post", LocalDateTime.parse("2024-05-02T08:00:00"), 4, "female", 0, false);
         Result<Post> result = service.update(postToUpdate);
         assertFalse(result.isSuccess());
     }

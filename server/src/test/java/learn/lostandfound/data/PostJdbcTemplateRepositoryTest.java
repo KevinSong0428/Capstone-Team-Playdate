@@ -1,6 +1,8 @@
 package learn.lostandfound.data;
 
+import learn.lostandfound.models.Animal;
 import learn.lostandfound.models.Post;
+import learn.lostandfound.models.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,9 +49,11 @@ class PostJdbcTemplateRepositoryTest {
 
     @Test
     void shouldAddNewPost() throws DataAccessException {
+        Animal animal = new Animal(1, "", "DESC", "ANIMAL", "BREED");
+        User user = new User(1, "Name", "Email", "Phone");
         Post post = new Post();
-        post.setAnimalId(2);
-        post.setUserId(1);
+        post.setAnimal(animal);
+        post.setUser(user);
         post.setUrl("wakowako.com");
         post.setDescription("I found this animal but do not know anything else");
         post.setDateTime(LocalDateTime.parse("2008-10-18T00:00:00"));
@@ -65,6 +69,11 @@ class PostJdbcTemplateRepositoryTest {
     @Test
     void shouldUpdatePost() throws DataAccessException {
         Post post = new Post();
+        Animal animal = new Animal(1, "", "DESC", "ANIMAL", "BREED");
+        User user = new User(1, "Name", "Email", "Phone");
+        post.setAnimal(animal);
+        post.setDescription("Description");
+        post.setUser(user);
         post.setUrl("why.com");
         post.setLocationId(2);
         post.setFound(false);

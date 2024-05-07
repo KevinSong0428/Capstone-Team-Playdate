@@ -32,7 +32,7 @@ public class UserService {
             return result;
         }
         if(user.getUserId()<=0){
-            result.addMessage("User id must be set for `update` ooepration", ResultType.INVALID);
+            result.addMessage("User id must be set for `update` operation", ResultType.INVALID);
             return result;
         }
         if(!repository.update(user)){
