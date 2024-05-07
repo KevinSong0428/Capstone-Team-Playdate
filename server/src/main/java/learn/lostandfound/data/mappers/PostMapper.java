@@ -12,7 +12,7 @@ public class PostMapper implements RowMapper<Post>  {
         Post post = new Post();
         post.setId(resultSet.getInt("post_id"));
         post.setAnimalId(resultSet.getInt("animal_id"));
-        post.setUserId(resultSet.getInt("animal_id"));
+        post.setUserId(resultSet.getInt("user_id"));
         post.setUrl(resultSet.getString("img_url"));
         post.setDescription(resultSet.getString("description"));
         post.setDateTime(resultSet.getTimestamp("time").toLocalDateTime());
