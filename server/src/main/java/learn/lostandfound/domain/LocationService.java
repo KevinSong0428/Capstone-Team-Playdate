@@ -4,9 +4,11 @@ import learn.lostandfound.data.DataAccessException;
 import learn.lostandfound.data.LocationRepository;
 import learn.lostandfound.models.Location;
 import learn.lostandfound.models.Post;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class LocationService {
     private final LocationRepository repository;
 
@@ -44,10 +46,10 @@ public class LocationService {
             return result;
         }
         if(Validations.isNullOrBlank(location.getCity())){
-            result.addMessage("City is required", ResultType.INVALID);
+            result.addMessage("City is required.", ResultType.INVALID);
         }
         if(Validations.isNullOrBlank(location.getState())){
-            result.addMessage("State is required", ResultType.INVALID);
+            result.addMessage("State is required.", ResultType.INVALID);
         }
         if(Validations.isNullOrBlank(location.getZipCode())){
             result.addMessage("Zip Code is required.", ResultType.INVALID);
