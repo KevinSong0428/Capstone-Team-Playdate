@@ -40,7 +40,7 @@ public class AnimalJdbcTemplateRepository implements AnimalRepository{
     @Override
     public Animal add(Animal animal) throws DataAccessException {
         final String sql = "INSERT INTO animal (`name`, characteristics, animal, breed) " +
-                "VALUES (?, ?, ?, ?, ?);";
+                "VALUES (?, ?, ?, ?);";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
