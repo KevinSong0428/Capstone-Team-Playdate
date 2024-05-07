@@ -8,11 +8,13 @@ import learn.lostandfound.models.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 
+@Repository
 public class PostJdbcTemplateRepository implements PostRepository{
 
     private final JdbcTemplate jdbcTemplate;
@@ -22,7 +24,7 @@ public class PostJdbcTemplateRepository implements PostRepository{
     }
     @Override
     public List<Post> findAll() {
-        final String sql = "SELECT *"
+        final String sql = "SELECT * "
                 + "FROM post;";
         return jdbcTemplate.query(sql, new PostMapper());
     }
@@ -39,7 +41,7 @@ public class PostJdbcTemplateRepository implements PostRepository{
 // make sure to do camel casing for the models
     @Override
     public Post add(Post post) throws DataAccessException {
-        final String sql = "INSERT INTO post (animal_id, user_id, url, description, date_time, location_id, gender, size, found) " +
+        final String sql = "INSERT INTO post (animal_id, user_id, img_url, `description`, time, location_id, gender, size, `found`) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -66,28 +68,17 @@ public class PostJdbcTemplateRepository implements PostRepository{
         return post;
     }
 
-
-//  this.id = id;
-//        this.animalId = animalId;
-//        this.userId = userId;
-//        this.url = url;
-//        this.description = description;
-//        this.dateTime = dateTime;
-//        this.locationId = locationId;
-//        this.gender = gender;
-//        this.size = size;
-//        this.found = found;
     @Override
     public boolean update(Post post) throws DataAccessException{
-        final String sql = "UPDATE users set " +
-                "`url` = ?, location_id = ?, found = ? " +
+        final String sql = "UPDATE post set " +
+                "`img_url` = ?, location_id = ?, `found` = ? " +
                 "WHERE post_id = ?;";
 
-        return jdbcTemplate.update(sql, post.getUrl(), post.getLocationId(), post.isFound()) > 0;
+        return jdbcTemplate.update(sql, post.getUrl(), post.getLocationId(), post.isFound(), post.getId()) > 0;
     }
 
     @Override
     public boolean deleteById(int id) {
-        return jdbcTemplate.update("DELETE FROM users where post_id = ?;", id) > 0;
+        return jdbcTemplate.update("DELETE FROM post where post_id = ?;", id) > 0;
     }
 }
