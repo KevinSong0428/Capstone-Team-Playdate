@@ -1,22 +1,27 @@
 package learn.lostandfound.models;
 
+import java.util.Objects;
+
 public class User {
     private int userId;
     private String name;
     private String phoneNumber;
     private String email;
-    private String state;
-    private String city;
 
     public User() {}
 
-    public User(int userId, String name, String phoneNumber, String email, String state, String city) {
+    public User(String name, String phoneNumber, String email) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
+
+    public User(int userId, String name, String phoneNumber, String email) {
+
         this.userId = userId;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.state = state;
-        this.city = city;
     }
 
     public int getUserId() {
@@ -51,12 +56,17 @@ public class User {
         this.email = email;
     }
 
-    public String getState() {
-        return this.state;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return userId == user.userId && Objects.equals(name, user.name) && Objects.equals(phoneNumber, user.phoneNumber) && Objects.equals(email, user.email);
     }
 
-    public String getCity() {
-        return this.city;
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, name, phoneNumber, email);
     }
 
 }
