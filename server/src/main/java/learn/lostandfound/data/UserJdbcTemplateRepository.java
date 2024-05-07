@@ -7,6 +7,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.dao.DataAccessException;
+
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
@@ -20,6 +21,7 @@ public class UserJdbcTemplateRepository implements UserRepository{
 
     @Override
     public List<User> findAll() throws DataAccessException {
+
         final String sql = "SELECT * "
                 + "FROM user;";
         return jdbcTemplate.query(sql, new UserMapper());
@@ -30,6 +32,7 @@ public class UserJdbcTemplateRepository implements UserRepository{
         final String sql = "SELECT * "
                 + "FROM user "
                 + "WHERE user_id = ?;";
+
         return jdbcTemplate.query(sql, new UserMapper(), id)
                 .stream()
                 .findFirst()
@@ -59,6 +62,7 @@ public class UserJdbcTemplateRepository implements UserRepository{
     @Override
     public boolean update(User user) throws DataAccessException {
         final String sql = "UPDATE user SET " +
+
                 "`name` = ?, phone = ?, email = ? " +
                 "WHERE user_id = ?;";
 

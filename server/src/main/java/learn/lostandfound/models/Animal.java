@@ -9,13 +9,14 @@ public class Animal {
     private String animal;
     private String breed;
 
+
     public Animal(String name, String characteristic, String animal, String breed) {
         this.name = name;
         this.characteristic = characteristic;
         this.animal = animal;
         this.breed = breed;
     }
-
+  
     public Animal(int animal_id, String name, String characteristic, String animal, String breed) {
         this.animalId = animal_id;
         this.name = name;

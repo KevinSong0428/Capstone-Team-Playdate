@@ -17,6 +17,7 @@ public class User {
     }
 
     public User(int userId, String name, String phoneNumber, String email) {
+
         this.userId = userId;
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -67,4 +68,5 @@ public class User {
     public int hashCode() {
         return Objects.hash(userId, name, phoneNumber, email);
     }
+
 }
