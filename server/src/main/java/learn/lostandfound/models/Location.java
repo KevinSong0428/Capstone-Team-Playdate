@@ -1,5 +1,7 @@
 package learn.lostandfound.models;
 
+import java.util.Objects;
+
 public class Location {
     private int locationId;
     private String address;
@@ -54,5 +56,28 @@ public class Location {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "locationId=" + locationId +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                '}';
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Location location = (Location) o;
+        return locationId == location.locationId && Objects.equals(address, location.address) && Objects.equals(city, location.city) && Objects.equals(state, location.state) && Objects.equals(zipCode, location.zipCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(locationId, address, city, state, zipCode);
     }
 }
