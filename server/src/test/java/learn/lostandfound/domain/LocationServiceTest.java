@@ -48,11 +48,10 @@ public class LocationServiceTest {
 
     @Test
     void shouldFindLocationById() throws DataAccessException {
-        int locationId = 1;
-        Location expectedLocation = new Location(locationId, "123 Maple Street", "Springfield", "IL", "62704");
-        when(locationRepository.findByLocationId(locationId)).thenReturn(expectedLocation);
+        Location expectedLocation = new Location(1, "123 Maple Street", "Springfield", "IL", "62704");
+        when(locationRepository.findByLocationId(1)).thenReturn(expectedLocation);
 
-        Location actualLocation = service.findById(locationId);
+        Location actualLocation = service.findById(1);
 
         assertEquals(expectedLocation, actualLocation);
     }
