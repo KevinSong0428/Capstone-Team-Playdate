@@ -20,8 +20,8 @@ public class Location {
         return locationId;
     }
 
-    public void setLocation_id(int location_id) {
-        this.locationId = location_id;
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
     }
 
     public String getAddress() {
