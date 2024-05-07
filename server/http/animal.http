@@ -1,0 +1,87 @@
+@base_url = http://localhost:8080/api/animal
+
+
+## GET all animals
+###
+GET {{base_url}} HTTP/1.1
+
+
+## GET animal by id
+###
+GET {{base_url}}/2 HTTP/1.1
+
+
+## 404 - GET animal id not found
+###
+GET {{base_url}}/20 HTTP/1.1
+
+## POST - add animal
+###
+POST {{base_url}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Haro",
+    "characteristic": "Very behaving",
+    "animal": "Dog",
+    "breed": "Mini Schnauzer"
+}
+
+
+## 400 - POST missing characteristic
+###
+POST {{base_url}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Haro",
+    "animal": "Dog",
+    "breed": "Mini Schnauzer"
+}
+
+
+## 400 - POST missing animal
+###
+POST {{base_url}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Haro",
+    "characteristic": "Very behaving",
+    "breed": "Mini Schnauzer"
+}
+
+## PUT - update animal
+###
+PUT {{base_url}}/8 HTTP/1.1
+Content-Type: application/json
+
+{
+    "animalId":8,
+    "name": "Haro The Evil",
+    "characteristic": "Very misbehaving",
+    "animal": "Dog",
+    "breed": "Mini Schnauzer"
+}
+
+## 400 - PUT missing animal type
+###
+PUT {{base_url}}/8 HTTP/1.1
+Content-Type: application/json
+
+{
+    "animalId": 8,
+    "name": "Haro",
+    "characteristic": "Very behaving",
+    "animal": "    ",
+    "breed": "Mini Schnauzer"
+}
+
+## DELETE
+###
+DELETE {{base_url}}/8 HTTP/1.1
+
+
+## 404 - DELETE id cannot be found
+###
+DELETE {{base_url}}/8 HTTP/1.1
