@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -70,11 +71,14 @@ public class PostJdbcTemplateRepository implements PostRepository{
 
     @Override
     public boolean update(Post post) throws DataAccessException{
-        final String sql = "UPDATE post set " +
-                "`img_url` = ?, location_id = ?, `found` = ? " +
+        final String sql = "UPDATE post SET " +
+                "animal_id = ?, user_id = ?, img_url = ?, `description` = ?, time = ?, location_id = ?, gender = ?," +
+                "`found` = ? " +
                 "WHERE post_id = ?;";
 
-        return jdbcTemplate.update(sql, post.getUrl(), post.getLocationId(), post.isFound(), post.getId()) > 0;
+        return jdbcTemplate.update(sql, post.getAnimalId(), post.getUserId(),
+                post.getUrl(), post.getDescription(), LocalDateTime.now(),
+                post.getLocationId(), post.getGender(), post.isFound(), post.getId()) > 0;
     }
 
     @Override
