@@ -20,7 +20,7 @@ create table location(
 
 create table animal(
 	animal_id int primary key auto_increment,
-    `name` varchar(250),
+    `name` varchar(250) default "Unknown",
     characteristics varchar(250) not null,
     animal varchar(100) not null,
     breed varchar(100) 
