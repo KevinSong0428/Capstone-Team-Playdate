@@ -30,7 +30,7 @@ export default function Posts() {
                         <div key={post.postId} className="col-lg-4 mb-4">
                             <div className="card">
                                 <div className="card-bod">
-                                    <h5 className="card-title">FOUND: {post.animal.name} </h5>
+                                    <h5 className="card-title">{post.found ? "FOUND" : "LOST"}: {post.animal.name} </h5>
                                     <p className="card-text">
                                         <strong>Description: </strong>{post.description}<br />
                                         <strong>Found: </strong>{post.dateTime}<br />
