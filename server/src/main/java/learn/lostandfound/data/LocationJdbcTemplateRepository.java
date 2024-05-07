@@ -58,19 +58,4 @@ public class LocationJdbcTemplateRepository implements LocationRepository{
         location.setLocationId(keyHolder.getKey().intValue());
         return location;
     }
-
-//    @Override
-//    public boolean update(Location location) throws DataAccessException {
-//        final String sql = "UPDATE location SET address = ?, city = ?, state = ?, zip_code = ? " +
-//                "WHERE location_id = ?";
-//
-//        return jdbcTemplate.update(sql, location.getAddress(), location.getCity(), location.getState(),
-//                location.getZipCode(), location.getLocationId()) > 0;
-//    }
-//
-//    @Override
-//    public boolean deleteByLocationId(int id) throws DataAccessException {
-//        return jdbcTemplate.update("DELETE FROM location where location_id = ?;", id) > 0;
-//    }
-
 }
