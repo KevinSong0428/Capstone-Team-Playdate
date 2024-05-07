@@ -26,15 +26,19 @@ public class PostJdbcTemplateRepository implements PostRepository{
     @Override
     public List<Post> findAll() {
         final String sql = "SELECT * "
-                + "FROM post;";
+                + "FROM post "
+                + " JOIN animal ON animal.animal_id = post.animal_id"
+                + " JOIN user ON user.user_id = post.user_id;";
         return jdbcTemplate.query(sql, new PostMapper());
     }
 
     @Override
     public Post findByPostId(int postId) {
         final String sql = "SELECT *"
-                + "FROM post "
-                + "WHERE post_id = ?;";
+                + " FROM post "
+                + " JOIN animal ON animal.animal_id = post.animal_id"
+                + " JOIN user ON user.user_id = post.user_id"
+                + " WHERE post_id = ?;";
         return jdbcTemplate.query(sql, new PostMapper(), postId).stream().findAny().orElse(null);
     }
 
@@ -49,8 +53,8 @@ public class PostJdbcTemplateRepository implements PostRepository{
 
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, post.getAnimalId());
-            ps.setInt(2, post.getUserId());
+            ps.setInt(1, post.getAnimal().getAnimalId());
+            ps.setInt(2, post.getUser().getUserId());
             ps.setString(3, post.getUrl());
             ps.setString(4, post.getDescription());
             ps.setObject(5, post.getDateTime());
@@ -76,7 +80,7 @@ public class PostJdbcTemplateRepository implements PostRepository{
                 "`found` = ? " +
                 "WHERE post_id = ?;";
 
-        return jdbcTemplate.update(sql, post.getAnimalId(), post.getUserId(),
+        return jdbcTemplate.update(sql, post.getAnimal().getAnimalId(), post.getUser().getUserId(),
                 post.getUrl(), post.getDescription(), LocalDateTime.now(),
                 post.getLocationId(), post.getGender(), post.isFound(), post.getId()) > 0;
     }

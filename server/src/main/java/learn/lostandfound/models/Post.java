@@ -7,8 +7,8 @@ import java.util.Objects;
 public class Post {
     private int id;
 
-    private int animalId;
-    private int userId;
+    private Animal animal;
+    private User user;
     private String url;
     private String description;
 
@@ -19,10 +19,10 @@ public class Post {
     private int size;
     private boolean found;
 
-    public Post(int id, int animalId, int userId, String url, String description, LocalDateTime dateTime, int locationId, String gender, int size, boolean found) {
+    public Post(int id, Animal animal, User user, String url, String description, LocalDateTime dateTime, int locationId, String gender, int size, boolean found) {
         this.id = id;
-        this.animalId = animalId;
-        this.userId = userId;
+        this.animal = animal;
+        this.user = user;
         this.url = url;
         this.description = description;
         this.dateTime = dateTime;
@@ -43,22 +43,6 @@ public class Post {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getAnimalId() {
-        return animalId;
-    }
-
-    public void setAnimalId(int animalId) {
-        this.animalId = animalId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getUrl() {
@@ -117,12 +101,41 @@ public class Post {
         this.size = size;
     }
 
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Post post = (Post) o;
+        return id == post.id && locationId == post.locationId && size == post.size && found == post.found && Objects.equals(animal, post.animal) && Objects.equals(user, post.user) && Objects.equals(url, post.url) && Objects.equals(description, post.description) && Objects.equals(dateTime, post.dateTime) && Objects.equals(gender, post.gender);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, animal, user, url, description, dateTime, locationId, gender, size, found);
+    }
+
     @Override
     public String toString() {
         return "Post{" +
                 "id=" + id +
-                ", animalId=" + animalId +
-                ", userId=" + userId +
+                ", animal=" + animal +
+                ", user=" + user +
                 ", url='" + url + '\'' +
                 ", description='" + description + '\'' +
                 ", dateTime=" + dateTime +
@@ -131,18 +144,5 @@ public class Post {
                 ", size=" + size +
                 ", found=" + found +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Post post = (Post) o;
-        return id == post.id && animalId == post.animalId && userId == post.userId && locationId == post.locationId && size == post.size && found == post.found && Objects.equals(url, post.url) && Objects.equals(description, post.description) && Objects.equals(dateTime, post.dateTime) && Objects.equals(gender, post.gender);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, animalId, userId, url, description, dateTime, locationId, gender, size, found);
     }
 }

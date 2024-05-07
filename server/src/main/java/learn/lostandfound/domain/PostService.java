@@ -56,11 +56,11 @@ public class PostService {
             result.addMessage("post cannot be null", ResultType.INVALID);
             return result;
         }
-        if(post.getAnimalId()<=0){
+        if(post.getAnimal().getAnimalId()<=0){
             result.addMessage("Animal ID is required.", ResultType.INVALID);
             return result;
         }
-        if(post.getUserId()<=0){
+        if(post.getUser().getUserId()<=0){
             result.addMessage("User ID is required", ResultType.INVALID);
         }
         if(Validations.isNullOrBlank(post.getUrl())){
