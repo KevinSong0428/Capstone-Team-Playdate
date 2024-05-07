@@ -77,6 +77,15 @@ public class LocationServiceTest {
         assertEquals(ResultType.INVALID, result.getType());
         assertEquals("Address is required.", result.getMessages().get(0));
     }
+    @Test
+    void shouldNotAddLocationWithBlankAddress() throws DataAccessException {
+        Location locationToAdd = new Location(0, "", "New York", "NY", "61222");
+
+        Result<Location> result = service.add(locationToAdd);
+
+        assertEquals(ResultType.INVALID, result.getType());
+        assertEquals("Address is required.", result.getMessages().get(0));
+    }
 
     @Test
     void shouldNotAddLocationWithInvalidCity() throws DataAccessException {
@@ -87,9 +96,18 @@ public class LocationServiceTest {
         assertEquals(ResultType.INVALID, result.getType());
         assertEquals("City is required.", result.getMessages().get(0));
     }
+    @Test
+    void shouldNotAddLocationWithBlankCity() throws DataAccessException {
+        Location locationToAdd = new Location(0, "555 King Street", "", "NY", "61222");
+
+        Result<Location> result = service.add(locationToAdd);
+
+        assertEquals(ResultType.INVALID, result.getType());
+        assertEquals("City is required.", result.getMessages().get(0));
+    }
 
     @Test
-    void shouldNotAddLocationWithInvalidState() throws DataAccessException {
+    void shouldNotAddLocationWithNullState() throws DataAccessException {
         Location locationToAdd = new Location(0, "555 King Street", "New York", null, "61222");
 
         Result<Location> result = service.add(locationToAdd);
@@ -98,8 +116,26 @@ public class LocationServiceTest {
         assertEquals("State is required.", result.getMessages().get(0));
     }
     @Test
-    void shouldNotAddLocationWithInvalidZipCode() throws DataAccessException {
+    void shouldNotAddLocationWithBlankState() throws DataAccessException {
+        Location locationToAdd = new Location(0, "555 King Street", "New York", "", "61222");
+
+        Result<Location> result = service.add(locationToAdd);
+
+        assertEquals(ResultType.INVALID, result.getType());
+        assertEquals("State is required.", result.getMessages().get(0));
+    }
+    @Test
+    void shouldNotAddLocationWithNullZipCode() throws DataAccessException {
         Location locationToAdd = new Location(0, "555 King Street", "New York", "NY", null);
+
+        Result<Location> result = service.add(locationToAdd);
+
+        assertEquals(ResultType.INVALID, result.getType());
+        assertEquals("Zip Code is required.", result.getMessages().get(0));
+    }
+    @Test
+    void shouldNotAddLocationWithBlankZipCode() throws DataAccessException {
+        Location locationToAdd = new Location(0, "555 King Street", "New York", "NY", "");
 
         Result<Location> result = service.add(locationToAdd);
 
