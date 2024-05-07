@@ -3,14 +3,14 @@ create database pet_lost_and_found_test;
 use pet_lost_and_found_test;
 
 -- tables
-create table users (
+create table user(
     user_id int primary key auto_increment,
     `name` varchar(25) not null,
     phone varchar(250) not null,
     email varchar(255) not null
 );
 
-create table locations(
+create table location(
 	location_id int primary key auto_increment,
     address varchar(250) not null,
     city varchar(250) not null,
@@ -18,7 +18,7 @@ create table locations(
     zip_code varchar(20) not null
 );
 
-create table animals (
+create table animal(
 	animal_id int primary key auto_increment,
     `name` varchar(250),
     characteristics varchar(250) not null,
@@ -26,7 +26,7 @@ create table animals (
     breed varchar(100) 
 );
 
-create table posts (
+create table post(
 	post_id int primary key auto_increment,
     animal_id int,
     user_id int not null,
@@ -39,13 +39,13 @@ create table posts (
     `found` boolean,
     constraint fk_animal_id
 		foreign key(animal_id)
-        references animals(animal_id),
+        references animal(animal_id),
 	constraint fk_user_id
 		foreign key(user_id)
-        references users(user_id),
+        references `user`(user_id),
 	constraint fk_location_id
 		foreign key(location_id)
-        references locations(location_id)
+        references location(location_id)
 );
 
 delimiter //
@@ -53,18 +53,18 @@ create procedure set_known_good_state()
 begin
 	set sql_safe_updates = 0;
 
-	delete from posts;
-    alter table posts auto_increment = 1;
+	delete from post;
+    alter table post auto_increment = 1;
 	
-    delete from animals;
-    alter table animals auto_increment = 1;
-    delete from locations;
-    alter table locations auto_increment = 1;
-    delete from users;
-    alter table users auto_increment = 1;
+    delete from animal;
+    alter table animal auto_increment = 1;
+    delete from location;
+    alter table location auto_increment = 1;
+    delete from `user`;
+    alter table `user` auto_increment = 1;
 
     
-insert into users(`name`, phone, email) values
+insert into `user`(`name`, phone, email) values
 	('Muffy Meyer', '555-555-5555', 'muffy@fakeemail.com'),
 	('John Doe', '555-123-4567', 'john.doe@example.com'),
     ('Samantha Right', '555-987-6543', 's.right@example.com'),
@@ -74,7 +74,7 @@ insert into users(`name`, phone, email) values
     ('Lisa Ray', '555-456-7890', 'lisa.ray@example.com'),
     ('Nina Patel', '555-567-8901', 'nina.patel@example.com');
 
-insert into locations(location_id, address, city, state, zip_code) values
+insert into location(location_id, address, city, state, zip_code) values
 	(1, '123 Maple Street', 'Springfield', 'IL', '62704'),
     (2, '456 Oak Avenue', 'Madison', 'WI', '53703'),
     (3, '789 Pine Lane', 'Phoenix', 'AZ', '85001'),
@@ -83,7 +83,7 @@ insert into locations(location_id, address, city, state, zip_code) values
     (6, '1516 Cedar Blvd', 'Seattle', 'WA', '98101'),
     (7, '1718 Willow Way', 'Denver', 'CO', '80202');
     
-insert into animals(animal_id, `name`, characteristics, animal, breed) values
+insert into animal(animal_id, `name`, characteristics, animal, breed) values
     (1, 'Buddy', 'Friendly, loves children', 'Dog', 'Golden Retriever'),
     (2, 'Whiskers', 'Shy, has a missing tail', 'Cat', 'Siamese'),
     (3, 'Coco', 'Very energetic, loves to play fetch', 'Dog', 'Border Collie'),
@@ -92,7 +92,7 @@ insert into animals(animal_id, `name`, characteristics, animal, breed) values
     (6, 'Ginger', 'Affectionate, loves to cuddle', 'Cat', 'Persian'),
     (7, 'Shadow', 'Independent, night prowler', 'Cat', 'Maine Coon');
 
-insert into posts(animal_id, user_id, img_url, `description`, `time`, location_id, gender, size, `found`) values
+insert into post(animal_id, user_id, img_url, `description`, `time`, location_id, gender, size, `found`) values
     (2, 2, 'https://example.com/images/whiskers.jpg', 'Found this cat in a garage, seems lost.', '2023-04-25 09:15:00', 2, 'Female', 10, true),
     (3, 3, 'https://example.com/images/coco.jpg', 'Coco went missing during our walk in the neighborhood.', '2023-04-30 16:45:00', 3, 'Male', 20, false),
     (4, 4, 'https://example.com/images/daisy.jpg', 'Spotted this dog wandering alone by the riverside.', '2023-05-02 08:00:00', 4, 'Female', 25, true),
