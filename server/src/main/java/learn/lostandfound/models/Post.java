@@ -2,6 +2,7 @@ package learn.lostandfound.models;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Post {
     private int id;
@@ -114,5 +115,34 @@ public class Post {
 
     public void setSize(int size) {
         this.size = size;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", animalId=" + animalId +
+                ", userId=" + userId +
+                ", url='" + url + '\'' +
+                ", description='" + description + '\'' +
+                ", dateTime=" + dateTime +
+                ", locationId=" + locationId +
+                ", gender='" + gender + '\'' +
+                ", size=" + size +
+                ", found=" + found +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Post post = (Post) o;
+        return id == post.id && animalId == post.animalId && userId == post.userId && locationId == post.locationId && size == post.size && found == post.found && Objects.equals(url, post.url) && Objects.equals(description, post.description) && Objects.equals(dateTime, post.dateTime) && Objects.equals(gender, post.gender);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, animalId, userId, url, description, dateTime, locationId, gender, size, found);
     }
 }

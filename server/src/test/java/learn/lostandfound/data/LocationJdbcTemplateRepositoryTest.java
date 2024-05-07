@@ -56,20 +56,4 @@ class LocationJdbcTemplateRepositoryTest {
         assertNotNull(actual.getLocationId());
     }
 
-//    @Test
-//    void shouldUpdateLocation() throws DataAccessException {
-//        Location location = new Location();
-//        location.setLocationId(2);
-//        location.setAddress("789 Oak St");
-//        location.setCity("Springfield");
-//        location.setState("IL");
-//        location.setZipCode("54321");
-//        assertTrue(repository.update(location));
-//    }
-//
-//    @Test
-//    void shouldDeleteLocation() throws DataAccessException {
-//        assertTrue(repository.deleteByLocationId(3));
-//        assertFalse(repository.deleteByLocationId(3));
-//    }
 }
