@@ -67,14 +67,27 @@ public class PostJdbcTemplateRepository implements PostRepository{
     }
 
 
-
+//  this.id = id;
+//        this.animalId = animalId;
+//        this.userId = userId;
+//        this.url = url;
+//        this.description = description;
+//        this.dateTime = dateTime;
+//        this.locationId = locationId;
+//        this.gender = gender;
+//        this.size = size;
+//        this.found = found;
     @Override
     public boolean update(Post post) throws DataAccessException{
-        return false;
+        final String sql = "UPDATE users set " +
+                "`url` = ?, location_id = ?, found = ? " +
+                "WHERE post_id = ?;";
+
+        return jdbcTemplate.update(sql, post.getUrl(), post.getLocationId(), post.isFound()) > 0;
     }
 
     @Override
     public boolean deleteById(int id) {
-        return false;
+        return jdbcTemplate.update("DELETE FROM users where post_id = ?;", id) > 0;
     }
 }
