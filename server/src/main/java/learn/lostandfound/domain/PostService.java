@@ -44,6 +44,7 @@ public class PostService {
             String msg = String.format("post id: %s, not found", post.getId());
             result.addMessage(msg, ResultType.NOT_FOUND);
         }
+
         return result;
     }
     public boolean deleteById(int postId) throws DataAccessException {
