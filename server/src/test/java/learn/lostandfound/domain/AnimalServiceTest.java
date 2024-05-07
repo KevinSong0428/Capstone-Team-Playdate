@@ -90,7 +90,6 @@ class AnimalServiceTest {
         when(repository.add(arg)).thenReturn(expected);
         Result<Animal> result = service.add(arg);
         assertEquals(ResultType.SUCCESS, result.getType());
-
         assertEquals(expected, result.getPayload());
     }
 

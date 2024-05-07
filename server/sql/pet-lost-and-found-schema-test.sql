@@ -103,3 +103,4 @@ insert into post(animal_id, user_id, img_url, `description`, `time`, location_id
 
 end //
 	set sql_safe_updates = 1;
+delimiter ;
