@@ -6,6 +6,7 @@ import learn.lostandfound.data.UserRepository;
 import learn.lostandfound.models.Post;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -68,7 +69,7 @@ public class PostService {
             result.addMessage("Description is required.", ResultType.INVALID);
         }
         if(post.getDateTime()==null){
-            result.addMessage("Date time is required.", ResultType.INVALID);
+            post.setDateTime(LocalDateTime.now());
         }
         if(Validations.isNullOrBlank(post.getGender())){
             result.addMessage("Gender is required", ResultType.INVALID);
