@@ -77,10 +77,10 @@ insert into animal(animal_id, `name`, characteristics, animal, breed) values
     (7, 'Shadow', 'Independent, night prowler', 'Cat', 'Maine Coon');
 
 insert into post(post_id, animal_id, user_id, img_url, `description`, `time`, location_id, gender, size, `found`) values
-    (1, 2, 2, 'https://example.com/images/whiskers.jpg', 'Found this cat in a garage, seems lost.', '2023-04-25 09:15:00', 2, 'Female', 10, true),
-    (2, 3, 3, 'https://example.com/images/coco.jpg', 'Coco went missing during our walk in the neighborhood.', '2023-04-30 16:45:00', 3, 'Male', 20, false),
-    (3, 4, 4, 'https://example.com/images/daisy.jpg', 'Spotted this dog wandering alone by the riverside.', '2023-05-02 08:00:00', 4, 'Female', 25, true),
-    (4, 5, 5, 'https://example.com/images/spike.jpg', 'Our beloved Spike has been missing since last Friday.', '2023-05-01 19:30:00', 5, 'Male', 30, false),
-    (5, 6, 6, 'https://example.com/images/ginger.jpg', 'Found a friendly cat in the park, looking for owner.', '2023-05-03 13:20:00', 6, 'Female', 12, true),
-    (6, 7, 7, 'https://example.com/images/shadow.jpg', 'Shadow has not returned home since yesterday evening.', '2023-05-04 17:50:00', 7, 'Male', 15, false),
-    (7, 1, 8, 'https://example.com/images/buddy2.jpg', 'Just found wandering near downtown. Is he yours?', '2023-05-05 12:00:00', 1, 'Male', 30, true);
+    (1, 2, 2, 'https://w2pcms.com/wp-content/uploads/sites/10/2024/04/Cat_Found_Amazon_Box_60313_fd908b-e1714529145145.jpg?w=999', 'Found this cat in a garage, seems lost.', '2023-04-25 09:15:00', 2, 'Female', 10, true),
+    (2, 3, 3, 'https://www.dogbreedinfo.com/images27/XoloitzcuintliXoloMexicanHairlessTepeizeuintliXoloitzcuintleRelic11MonthsOld1.jpg', 'Coco went missing during our walk in the neighborhood.', '2023-04-30 16:45:00', 3, 'Male', 20, false),
+    (3, 4, 4, 'https://dogtrekker.com/wp-content/uploads/2022/07/AdobeStock_119693300_b_river-scaled-e1657492562636.jpeg', 'Spotted this dog wandering alone by the riverside.', '2023-05-02 08:00:00', 4, 'Female', 25, true),
+    (4, 5, 5, 'https://vetmed.illinois.edu/wp-content/uploads/2021/04/pc-keller-hedgehog.jpg', 'Our beloved Spike has been missing since last Friday.', '2023-05-01 19:30:00', 5, 'Male', 30, false),
+    (5, 6, 6, 'https://hips.hearstapps.com/hmg-prod/images/white-cat-in-park-1556611722.jpg?crop=0.668xw:1.00xh;0,0&resize=2048:*', 'Found a friendly cat in the park, looking for owner.', '2023-05-03 13:20:00', 6, 'Female', 12, true),
+    (6, 7, 7, 'https://media.cnn.com/api/v1/images/stellar/prod/191026120622-03-black-cat.jpg?q=w_1110,c_fill', 'Shadow has not returned home since yesterday evening.', '2023-05-04 17:50:00', 7, 'Male', 15, false),
+    (7, 1, 8, 'https://animaljustice.ca/wp-content/uploads/2018/03/hare-2135486_1920-1.jpg', 'Just found wandering near downtown. Is he yours?', '2023-05-05 12:00:00', 1, 'Male', 30, true);
