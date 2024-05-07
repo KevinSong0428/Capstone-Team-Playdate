@@ -20,7 +20,7 @@ public class AnimalService {
     public Animal findById(int id) throws DataAccessException {
         return repository.findById(id);
     }
-    public Result<Animal> add(Animal animal) {
+    public Result<Animal> add(Animal animal) throws DataAccessException {
         Result<Animal> result = validate(animal);
         if (!result.isSuccess()) {
             return result;
@@ -37,7 +37,7 @@ public class AnimalService {
         return result;
     }
 
-    public Result<Animal> update(Animal animal) {
+    public Result<Animal> update(Animal animal) throws DataAccessException {
         Result<Animal> result = validate(animal);
         if (!result.isSuccess()) {
             return result;
