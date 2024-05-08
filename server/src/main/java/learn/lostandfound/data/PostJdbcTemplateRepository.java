@@ -121,12 +121,12 @@ public class PostJdbcTemplateRepository implements PostRepository{
     public boolean update(Post post) throws DataAccessException{
         final String sql = "UPDATE post SET " +
                 "animal_id = ?, user_id = ?, img_url = ?, `description` = ?, time = ?, location_id = ?, gender = ?," +
-                "`found` = ? " +
+                "`size` = ?, `found` = ? " +
                 "WHERE post_id = ?;";
 
         return jdbcTemplate.update(sql, post.getAnimal().getAnimalId(), post.getUser().getUserId(),
                 post.getUrl(), post.getDescription(), LocalDateTime.now(),
-                post.getLocation().getLocationId(), post.getGender(), post.isFound(), post.getId()) > 0;
+                post.getLocation().getLocationId(), post.getGender(), post.getSize(), post.isFound(), post.getId()) > 0;
     }
 
     @Override

@@ -100,3 +100,38 @@ DELETE http://localhost:8080/api/post/11
 
 ###
 DELETE http://localhost:8080/api/post/999
+
+
+###
+PUT http://localhost:8080/api/post/1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "animal": {
+    "animalId": 2,
+    "name": "Whiskers",
+    "characteristic": "Shy, has a missing tail",
+    "animal": "Cat",
+    "breed": "Siamese"
+  },
+  "user": {
+    "userId": 2,
+    "name": "John Doe",
+    "phoneNumber": "555-123-4567",
+    "email": "john.doe@example.com"
+  },
+  "url": "https://w2pcms.com/wp-content/uploads/sites/10/2024/04/Cat_Found_Amazon_Box_60313_fd908b-e1714529145145.jpg?w=999",
+  "description": "Found this cat in a trash, seems lost.",
+  "dateTime": "2023-04-25T02:15:00",
+  "gender": "Female",
+  "location": {
+    "locationId": 2,
+    "address": "456 Oak Avenue",
+    "city": "Madison",
+    "state": "WI",
+    "zipCode": "53703"
+  },
+  "size": 10,
+  "found": false
+}

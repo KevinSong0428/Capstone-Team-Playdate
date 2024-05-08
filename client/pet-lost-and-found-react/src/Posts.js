@@ -74,12 +74,12 @@ export default function Posts() {
                                     <p className="card-text">
                                         <div className="img-container">
                                         </div>
+
                                         <strong>Description: </strong>{post.description}<br />
                                         <strong>Weight (lb): </strong>{post.size}<br />
-                                        <strong>Found: </strong>{post.dateTime}<br />
+                                        <strong>Time Found: </strong>{post.dateTime}<br />
                                         <strong>Gender: </strong>{post.gender}<br />
-                                        <strong>Contact me at: </strong>{post.user.phoneNumber} or {post.user.email}<br />
-                                        <strong>{post.user.name}</strong>
+                                        <strong>Contact {post.user.name} at: </strong>{post.user.phoneNumber} or {post.user.email}<br />
                                     </p>
                                 </div>
                                 <Link className="btn btn-primary btn-sm" to={`/posts/edit/${post.id}`}>Edit</Link>

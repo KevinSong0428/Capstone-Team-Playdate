@@ -127,6 +127,8 @@ function PostForm() {
             const response = await fetch(post.animal.animalId ? `${animalUrl}/${post.animal.animalId}` : animalUrl, init);
             if (!response.ok) {
                 throw new Error(`Failed to ${post.animal.animalId ? 'update' : 'create'} animal: ${response.status}`);
+            } else if (response.status === 204) {
+                return null;
             }
             console.log(response)
 
@@ -157,6 +159,8 @@ function PostForm() {
 
             if (!response.ok) {
                 throw new Error(`Failed to ${post.user.userId ? 'update' : 'create'} user: ${response.status}`);
+            } else if (response.status === 204) {
+                return null;
             }
 
             const data = await response.json();
@@ -174,18 +178,23 @@ function PostForm() {
 
     const addLocation = async () => {
         console.log("Creating location");
+        if (post.id) {
+            return;
+        }
         const init = {
-            method: post.location.locationId ? "PUT" : 'POST',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(post.location)
         };
         try {
-            const response = await fetch(post.location.locationId ? `${locationUrl}/${post.location.locationId}` : locationUrl, init);
+            const response = await fetch(locationUrl, init);
 
             if (!response.ok) {
-                throw new Error(`Failed to ${post.location.locationId ? 'update' : 'create'} location: ${response.status}`);
+                throw new Error(`Failed to create location: ${response.status}`);
+            } else if (response.status === 204) {
+                return null;
             }
 
             const data = await response.json();
@@ -197,7 +206,7 @@ function PostForm() {
                 post.location.locationId = data.locationId;
             }
         } catch (error) {
-            console.error(`Error ${post.location.locationId ? 'updating' : 'creating'} location: `, error);
+            console.error(`Error creating location: `, error);
         }
     }
 
@@ -214,10 +223,14 @@ function PostForm() {
             body: JSON.stringify(post)
         };
         try {
+            console.log(JSON.stringify(post))
             const response = await fetch(id ? `${postUrl}/${id}` : postUrl, init);
-
+            console.log(response)
             if (!response.ok) {
                 throw new Error(`Failed to ${id ? 'update' : 'create'} post: ${response.status}`);
+            } else if (response.status === 204) {
+                navigate('/');
+                return null;
             }
 
             const data = await response.json();
@@ -424,7 +437,7 @@ function PostForm() {
                             />
                         </div>
                         <div className='form-group'>
-                            <label htmlFor='dateTime'>Select date time</label>
+                            <label htmlFor='dateTime'>Select date time: </label>
                             <input
                                 id='dateTime'
                                 name='dateTime'
@@ -435,7 +448,7 @@ function PostForm() {
                             />
                         </div>
                         <div className='form-group'>
-                            <label htmlFor='gender'>Gender</label>
+                            <label htmlFor='gender'>Gender: </label>
                             <div className='form-check'>
                                 <input
                                     id='female'
