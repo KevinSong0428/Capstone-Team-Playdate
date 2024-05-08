@@ -21,15 +21,21 @@ public class AnimalJdbcTemplateRepository implements AnimalRepository{
     }
     @Override
     public List<Animal> findAll() throws DataAccessException {
-        final String sql = "SELECT *"
-                + "FROM animal;";
+        final String sql = "select animal.animal_id, " +
+                "animal.name as animal_name, " +
+                "animal.characteristics, " +
+                "animal.animal, " +
+                "animal.breed from animal;";
         return jdbcTemplate.query(sql, new AnimalMapper());
     }
 
     @Override
     public Animal findById(int id) throws DataAccessException {
-        final String sql = "SELECT * " +
-                "FROM animal " +
+        final String sql = "select animal.animal_id, " +
+                "animal.name as animal_name, " +
+                "animal.characteristics, " +
+                "animal.animal, " +
+                "animal.breed from animal " +
                 "WHERE animal_id = ?;";
         return jdbcTemplate.query(sql, new AnimalMapper(), id)
                 .stream()
