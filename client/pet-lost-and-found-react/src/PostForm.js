@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
+
 const postDefault = {
-    animal: { animalId: '' },
+    animal: { animalId: '' , name: ''},
     user: { userId: '' },
     location: { locationId: '' },
     url: "",
@@ -17,6 +18,8 @@ function PostForm(){
     const [posts, setPosts] = useState([]);
     const [currentView, setCurrentView] = useState('List');
     const [errors, setErrors] = useState([]);
+    const [users, setUsers] = useState([]);
+    const [locations, setLocations] = useState([]);
 
     const url = 'http://localhost:8080/api/post';
 
@@ -24,6 +27,31 @@ function PostForm(){
 
     const { id } = useParams();
 
+    useEffect(() => {
+        fetch("http://localhost:8080/api/user")
+            .then(response => {
+                if (response.status === 200) {
+                    return response.json();
+                } else {
+                    return Promise.reject(`Unexpected status code: ${response.status}`);
+                }
+            })
+            .then(data => setUsers(data)) // here we are setting our data to our state variable
+            .catch(console.log);
+    }, []);
+
+    useEffect(() => {
+        fetch("http://localhost:8080/api/location")
+            .then(response => {
+                if (response.status === 200) {
+                    return response.json();
+                } else {
+                    return Promise.reject(`Unexpected status code: ${response.status}`);
+                }
+            })
+            .then(data => setLocations(data)) // here we are setting our data to our state variable
+            .catch(console.log);
+    }, []);
     useEffect(()=>{
         if(id){
             fetch(`${url}/${id}`)
@@ -133,10 +161,34 @@ function PostForm(){
         onChange={handleChange}
     />
 </fieldset>
-
-
+<fieldset className='form-group'>
+    <label htmlFor='animal.name'>Animal Name</label>
+    <input
+        id='animal.name'
+        name='animal.name'
+        type='text'
+        className='form form-control'
+        value={post.animal.name || ''}
+        onChange={handleChange}
+    />
+</fieldset>
 
 <fieldset className='form-group'>
+    <label htmlFor='user.userId'>User</label>
+    <select
+        id='user.userId'
+        name='user.userId'
+        className='form form-control'
+        value={post.user.userId || ''}
+        onChange={handleChange}
+    >
+        <option value="">Select a User</option>
+        {users.map(user => (
+            <option key={user.userId} value={user.userId}>{user.name}</option>
+        ))}
+    </select>
+</fieldset>
+{/* <fieldset className='form-group'>
     <label htmlFor='user.userId'>User Id</label>
     <input
         id='user.userId'
@@ -146,7 +198,7 @@ function PostForm(){
         value={post.user.userId || ''}
         onChange={handleChange}
     />
-</fieldset>
+</fieldset> */}
 
 
                 <fieldset className='form-group'>
@@ -186,7 +238,7 @@ function PostForm(){
                 </fieldset>
 
 
-                <fieldset className='form-group'>
+                {/* <fieldset className='form-group'>
     <label htmlFor='location.locationId'>Location Id</label>
     <input
         id='location.locationId'
@@ -196,8 +248,22 @@ function PostForm(){
         value={post.location.locationId || ''}
         onChange={handleChange}
     />
+</fieldset> */}
+<fieldset className='form-group'>
+    <label htmlFor='location.locationId'>User</label>
+    <select
+        id='location.locationId'
+        name='location.locationId'
+        className='form form-control'
+        value={post.location.locationId || ''}
+        onChange={handleChange}
+    >
+        <option value="">Select a Location</option>
+        {locations.map(location => (
+            <option key={location.locationId} value={location.locationId}>{location.city}</option>
+        ))}
+    </select>
 </fieldset>
-
 
                 <fieldset className='form-group'>
                     <label htmlFor='gender'>Gender</label>
