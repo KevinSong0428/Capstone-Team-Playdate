@@ -1,6 +1,7 @@
 package learn.lostandfound.data;
 
 import learn.lostandfound.models.Animal;
+import learn.lostandfound.models.Location;
 import learn.lostandfound.models.Post;
 import learn.lostandfound.models.User;
 import org.junit.jupiter.api.BeforeEach;
@@ -52,12 +53,13 @@ class PostJdbcTemplateRepositoryTest {
         Animal animal = new Animal(1, "", "DESC", "ANIMAL", "BREED");
         User user = new User(1, "Name", "Email", "Phone");
         Post post = new Post();
+        Location location = new Location(4, "Test Address", "Test City", "Test State", "Test Zip Code");
         post.setAnimal(animal);
         post.setUser(user);
         post.setUrl("wakowako.com");
         post.setDescription("I found this animal but do not know anything else");
         post.setDateTime(LocalDateTime.parse("2008-10-18T00:00:00"));
-        post.setLocationId(1);
+        post.setLocation(location);
         post.setGender("male");
         post.setSize(48);
         post.setFound(false);
@@ -75,8 +77,9 @@ class PostJdbcTemplateRepositoryTest {
         post.setDescription("Description");
         post.setUser(user);
         post.setUrl("why.com");
-        post.setLocationId(2);
+        Location location = new Location(4, "Test Address", "Test City", "Test State", "Test Zip Code");
         post.setFound(false);
+        post.setLocation(location);
         post.setId(4);
         assertTrue(repository.update(post));
     }

@@ -1,0 +1,9 @@
+.card-bod img {
+    width: 50%;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

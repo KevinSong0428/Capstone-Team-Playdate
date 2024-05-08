@@ -13,25 +13,31 @@ public class Post {
     private String description;
 
     private LocalDateTime dateTime;
-    private int locationId;
     private String gender;
-
+    private Location location;
     private int size;
     private boolean found;
 
-    public Post(int id, Animal animal, User user, String url, String description, LocalDateTime dateTime, int locationId, String gender, int size, boolean found) {
+    public Post(int id, Animal animal, User user, String url, String description, LocalDateTime dateTime, String gender, Location location, int size, boolean found) {
         this.id = id;
         this.animal = animal;
         this.user = user;
         this.url = url;
         this.description = description;
         this.dateTime = dateTime;
-        this.locationId = locationId;
         this.gender = gender;
+        this.location = location;
         this.size = size;
         this.found = found;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
 
     public Post() {
 
@@ -76,15 +82,6 @@ public class Post {
     public void setFound(boolean found) {
         this.found = found;
     }
-
-    public int getLocationId() {
-        return locationId;
-    }
-
-    public void setLocationId(int locationId) {
-        this.locationId = locationId;
-    }
-
     public String getGender() {
         return gender;
     }
@@ -122,12 +119,12 @@ public class Post {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Post post = (Post) o;
-        return id == post.id && locationId == post.locationId && size == post.size && found == post.found && Objects.equals(animal, post.animal) && Objects.equals(user, post.user) && Objects.equals(url, post.url) && Objects.equals(description, post.description) && Objects.equals(dateTime, post.dateTime) && Objects.equals(gender, post.gender);
+        return id == post.id && size == post.size && found == post.found && Objects.equals(animal, post.animal) && Objects.equals(user, post.user) && Objects.equals(url, post.url) && Objects.equals(description, post.description) && Objects.equals(dateTime, post.dateTime) && Objects.equals(gender, post.gender) && Objects.equals(location, post.location);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, animal, user, url, description, dateTime, locationId, gender, size, found);
+        return Objects.hash(id, animal, user, url, description, dateTime, gender, location, size, found);
     }
 
     @Override
@@ -139,8 +136,8 @@ public class Post {
                 ", url='" + url + '\'' +
                 ", description='" + description + '\'' +
                 ", dateTime=" + dateTime +
-                ", locationId=" + locationId +
                 ", gender='" + gender + '\'' +
+                ", location=" + location +
                 ", size=" + size +
                 ", found=" + found +
                 '}';

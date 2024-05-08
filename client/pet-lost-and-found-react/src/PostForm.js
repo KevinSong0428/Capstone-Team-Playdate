@@ -2,17 +2,16 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const postDefault = {
-    animal_id: "",
-    user_id: "",
-    url : "",
-    description : "",
-    dateTime : new Date().toISOString(),
-    location_id:"",
-    gender : "",
-    size : 0,
-    found : false
-}
-
+    animal: { animalId: '' },
+    user: { userId: '' },
+    location: { locationId: '' },
+    url: "",
+    description: "",
+    dateTime: new Date().toISOString(),
+    gender: "",
+    size: 0,
+    found: false
+};
 function PostForm(){
     const [post, setPost] = useState(postDefault);
     const [posts, setPosts] = useState([]);
@@ -44,19 +43,24 @@ function PostForm(){
 
 
     const handleChange = (event) => {
-       // make a copy of the object
-       const newPost = {...post};
+        const { name, value, type, checked } = event.target;
+        const [key1, nestedKey] = name.split('.');
 
-       //update the values of the properties we just changed
-       if(event.target.type === 'checkbox'){
-           newPost[event.target.name] = event.target.checked;
-       }else{
-           newPost[event.target.name] = event.target.value;
-       }
-
-       setPost(newPost);
-    }
-
+        if (key1 && nestedKey) {
+            setPost(post => ({
+                ...post,
+                [key1]: {
+                    ...post[key1],
+                    [nestedKey]: type === 'checkbox' ? checked : value
+                }
+            }));
+        } else {
+            setPost(post => ({
+                ...post,
+                [name]: type === 'checkbox' ? checked : value
+            }));
+        }
+    };
     const addPost = () => {
         console.log(post, 'this i spost..........')
         const init = {
@@ -119,34 +123,34 @@ function PostForm(){
             <form onSubmit={handleSubmit}>
 
             <fieldset className='form-group'>
-                    <label htmlfor='animal_id'>Animal Id</label>
-                    <input
-                        id='animal_id'
-                        name='animal_id'
-                        type='number'
-                        className='form form-control'
-                        value={post.animal_id}
-                        onChange={handleChange}
-                    />
-                </fieldset>
+    <label htmlFor='animal.animalId'>Animal Id</label>
+    <input
+        id='animal.animalId'
+        name='animal.animalId'
+        type='number'
+        className='form form-control'
+        value={post.animal.animalId || ''}
+        onChange={handleChange}
+    />
+</fieldset>
 
 
 
-            <fieldset className='form-group'>
-                    <label htmlfor='user_id'>User Id</label>
-                    <input
-                        id='user_id'
-                        name='user_id'
-                        type='number'
-                        className='form form-control'
-                        value={post.user_id}
-                        onChange={handleChange}
-                    />
-                </fieldset>
+<fieldset className='form-group'>
+    <label htmlFor='user.userId'>User Id</label>
+    <input
+        id='user.userId'
+        name='user.userId'
+        type='number'
+        className='form form-control'
+        value={post.user.userId || ''}
+        onChange={handleChange}
+    />
+</fieldset>
 
 
                 <fieldset className='form-group'>
-                    <label htmlfor='url'>Url Image</label>
+                    <label htmlFor='url'>Url Image</label>
                     <input
                         id='url'
                         name='url'
@@ -158,7 +162,7 @@ function PostForm(){
                 </fieldset>
 
                 <fieldset className='form-group'>
-                    <label htmlfor='description'>Please provide a description</label>
+                    <label htmlFor='description'>Please provide a description</label>
                     <input
                         id='description'
                         name='description'
@@ -170,7 +174,7 @@ function PostForm(){
                 </fieldset>
 
                 <fieldset className='form-group'>
-                    <label htmlfor='dateTime'>Select date time</label>
+                    <label htmlFor='dateTime'>Select date time</label>
                     <input
                         id='dateTime'
                         name='dateTime'
@@ -183,20 +187,20 @@ function PostForm(){
 
 
                 <fieldset className='form-group'>
-                    <label htmlfor='location_id'>Location Id</label>
-                    <input
-                        id='location_id'
-                        name='location_id'
-                        type='number'
-                        className='form form-control'
-                        value={post.location_id}
-                        onChange={handleChange}
-                    />
-                </fieldset>
+    <label htmlFor='location.locationId'>Location Id</label>
+    <input
+        id='location.locationId'
+        name='location.locationId'
+        type='number'
+        className='form form-control'
+        value={post.location.locationId || ''}
+        onChange={handleChange}
+    />
+</fieldset>
 
 
                 <fieldset className='form-group'>
-                    <label htmlfor='gender'>Gender</label>
+                    <label htmlFor='gender'>Gender</label>
                     <div className='form-check'>
                            <input
                         id='female'
@@ -238,7 +242,7 @@ function PostForm(){
                 </fieldset>
 
                 <fieldset className='form-group'>
-                    <label htmlfor='size'>Size</label>
+                    <label htmlFor='size'>Size</label>
                     <input
                         id='size'
                         name='size'
@@ -259,7 +263,7 @@ function PostForm(){
                         checked={post.found}
                         onChange={handleChange}
                         />
-                    <label htmlfor='found' className='form-check-label'>Found</label>
+                    <label htmlFor='found' className='form-check-label'>Found</label>
                     </div>
 
                 </fieldset>
