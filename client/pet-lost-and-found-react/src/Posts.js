@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import gsap from "gsap";
+import Modal from "./Modal";
+import Post from "./Post";
 import "./Posts.css";
 
 export default function Posts() {
@@ -8,6 +10,11 @@ export default function Posts() {
     const postRefs = useRef(new Map());
     const url = "http://localhost:8080/api/post";
     const navigate = useNavigate();
+
+
+    const [showModal, setShowModal] = useState(false);
+    const [selectedPostId, setSelectedPostId] = useState(null);
+
 
     //fetch data
     useEffect(() => {
@@ -55,6 +62,17 @@ export default function Posts() {
             }
         }
     };
+
+    const handleOpenModal = (postId) => {
+        setSelectedPostId(postId);
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        setSelectedPostId(null);
+    };
+
     return (
         <>
             <div className="container mt-5">
@@ -83,11 +101,16 @@ export default function Posts() {
                                 </div>
                                 <Link className="btn btn-primary btn-sm" to={`/posts/edit/${post.id}`}>Edit</Link>
                                 <button className='btn btn-danger btn-sm delete-btn' onClick={() => handleDelete(post.id)}>Delete</button>
+                                <button className="btn btn-info btn-sm" onClick={() => handleOpenModal(post.id)}>View Details</button>
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
+            <Modal show={showModal} onClose={handleCloseModal}>
+                {selectedPostId && <Post postId={selectedPostId} />}
+            </Modal>
+
         </>
     );
 }
