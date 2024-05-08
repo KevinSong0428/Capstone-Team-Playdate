@@ -14,7 +14,6 @@ public class PostMapper implements RowMapper<Post>  {
         post.setUrl(resultSet.getString("img_url"));
         post.setDescription(resultSet.getString("description"));
         post.setDateTime(resultSet.getTimestamp("time").toLocalDateTime());
-        post.setLocationId(resultSet.getInt("location_id"));
         post.setGender(resultSet.getString("gender"));
         post.setSize(resultSet.getInt("size"));
         post.setFound(resultSet.getBoolean("found"));
@@ -25,6 +24,9 @@ public class PostMapper implements RowMapper<Post>  {
 
         UserMapper userMapper = new UserMapper();
         post.setUser(userMapper.mapRow(resultSet, i));
+
+        LocationMapper locationMapper = new LocationMapper();
+        post.setLocation(locationMapper.mapRow(resultSet, i));
 
         return post;
     }
