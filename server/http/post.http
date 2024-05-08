@@ -2,7 +2,7 @@
 GET http://localhost:8080/api/post
 
 ###
-GET http://localhost:8080/api/post/9
+GET http://localhost:8080/api/post/7
 
 ###
 GET http://localhost:8080/api/post/999
@@ -11,66 +11,92 @@ POST http://localhost:8080/api/post
 Content-Type: application/json
 
 {
-    "animalId": 2,
-    "userId": 2,
+    "animal": {
+        "animalId": 2
+    },
+    "user": {
+        "userId": 2
+    },
     "url": "https://example.com/images/haha.jpg",
     "description": "Found a scared kitty in Pompei, looking for owner.",
     "dateTime": "2024-02-03T06:08:00",
-    "locationId": 2,
+    "location": {
+        "locationId": 2
+    },
     "gender": "Male",
     "size": 22,
     "found": false
 }
+
 ###
 POST http://localhost:8080/api/post
 Content-Type: application/json
 
 {
-    "animalId": 100,
-    "userId": 2,
-    "url": "",
+    "animal": {
+        "animalId": 2
+    },
+    "user": {
+        "userId": 2
+    },
+    "url": "https://example.com/images/haha.jpg",
     "description": "Found a scared kitty in Pompei, looking for owner.",
     "dateTime": "2024-02-03T06:08:00",
-    "locationId": null,
+    "location": {
+        "locationId": null
+    },
     "gender": "Male",
     "size": 22,
     "found": false
 }
 
 ###
-PUT http://localhost:8080/api/post/9
+PUT http://localhost:8080/api/post/7
 Content-Type: application/json
 
 {
-    "id": 9,
-  "animalId": 2,
-  "userId": 2,
-  "url": "https://example.com/images/fake.jpg",
-  "description": "I stole this description.",
-  "dateTime": "2024-02-03T06:08:00",
-  "locationId": 2,
-  "gender": "Male",
-  "size": 22,
-  "found": false
+    "id": 7,
+    "animal": {
+        "animalId": 1
+    },
+    "user": {
+        "userId": 2
+    },
+    "url": "https://example.com/images/haha.jpg",
+    "description": "Found a scared kitty in Pompei, looking for owner.",
+    "dateTime": "2024-02-03T06:08:00",
+    "location": {
+        "locationId": 1
+    },
+    "gender": "Male",
+    "size": 22,
+    "found": false
 }
+###
 
 PUT http://localhost:8080/api/post/999
 Content-Type: application/json
 
 {
-    "id": 999,
-  "animalId": 2,
-  "userId": 2,
-  "url": "https://example.com/images/fake.jpg",
-  "description": "I stole this description.",
-  "dateTime": "2024-02-03T06:08:00",
-  "locationId": 2,
-  "gender": "Male",
-  "size": 22,
-  "found": false
+    "id": 7,
+    "animal": {
+        "animalId": null
+    },
+    "user": {
+        "userId": 2
+    },
+    "url": "https://example.com/images/haha.jpg",
+    "description": "Found a scared kitty in Pompei, looking for owner.",
+    "dateTime": "2024-02-03T06:08:00",
+    "location": {
+        "locationId": 1
+    },
+    "gender": "Male",
+    "size": 22,
+    "found": false
 }
 ###
-DELETE http://localhost:8080/api/post/9
+DELETE http://localhost:8080/api/post/11
 
 ###
 DELETE http://localhost:8080/api/post/999
