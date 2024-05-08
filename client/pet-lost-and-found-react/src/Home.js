@@ -1,6 +1,7 @@
 import React, { useState, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import "./styles.css";
+import Posts from "./Posts";
 
 export default function Home() {
   let timer = null;
@@ -158,6 +159,7 @@ export default function Home() {
           )}
         </div>
       </div>
+      <posts></posts>
     </div>
   );
 }
