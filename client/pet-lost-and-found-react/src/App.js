@@ -5,14 +5,16 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import Posts from './Posts';
 import PostForm from './PostForm';
+import Navbar from './Navbar';
 
 function App() {
     return (
         <Router>
+            <Navbar/>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="posts/add" element={<PostForm />} />
-                <Route path="/posts" element={<Posts />} />
+                <Route path="/post/add" element={<PostForm />} />
+                <Route path="/post" element={<Posts />} />
             </Routes>
         </Router>
     );
