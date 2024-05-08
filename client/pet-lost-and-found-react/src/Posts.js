@@ -2,22 +2,22 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Posts.css"
 export default function Posts() {
-    const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
 
-    const url = "http://localhost:8080/api/post";
+  const url = "http://localhost:8080/api/post";
 
-    useEffect(() => {
-        fetch(url)
-            .then(response => {
-                if (response.status === 200) {
-                    return response.json();
-                } else {
-                    return Promise.reject(`Unexpected status code: ${response.status}`);
-                }
-            })
-            .then(data => setPosts(data)) // here we are setting our data to our state variable
-            .catch(console.log);
-    }, []);
+  useEffect(() => {
+    fetch(url)
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          return Promise.reject(`Unexpected status code: ${response.status}`);
+        }
+      })
+      .then((data) => setPosts(data)) // here we are setting our data to our state variable
+      .catch(console.log);
+  }, []);
 
     return (
         <>
@@ -48,7 +48,11 @@ export default function Posts() {
                         </div>
                     ))}
                 </div>
+              </div>
             </div>
-        </>
-    )
+          ))}
+        </div>
+      </div>
+    </>
+  );
 }
