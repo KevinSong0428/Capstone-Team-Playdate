@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Posts.css"
+
 export default function Posts() {
     const [posts, setPosts] = useState([]);
-
     const url = "http://localhost:8080/api/post";
 
+    const navigate = useNavigate();
+
+    //fetch data
     useEffect(() => {
         fetch(url)
             .then(response => {
@@ -15,10 +18,32 @@ export default function Posts() {
                     return Promise.reject(`Unexpected status code: ${response.status}`);
                 }
             })
-            .then(data => setPosts(data)) // here we are setting our data to our state variable
+            .then(data => {
+                console.log(data); // Add this line to see what data structure is being returned
+                setPosts(data);
+            }) // here we are setting our data to our state variable
             .catch(console.log);
     }, []);
 
+
+    const handleDelete=(postId)=>{
+        const post = posts.find(post=> post.id === postId);
+        if(window.confirm(`Delete Post: ${post.animal.name}`)){
+            const init = {
+                method: "DELETE"
+            };
+            fetch(`${url}/${postId}`, init)
+            .then(response=>{
+                if(response.status===204){
+                    const newPosts = posts.filter(post=> post.id!==postId);
+                    setPosts(newPosts)
+                } else {
+                    return Promise.reject(`Unexpected Status Code: ${response.status}`);
+                }
+            })
+            .catch(console.log)
+        }
+    }
     return (
         <>
             <div className="container mt-5">
@@ -44,6 +69,7 @@ export default function Posts() {
                                         <strong>{post.user.name}</strong>
                                     </p>
                                 </div>
+                            <button className='btn btn-danger btn-sm delete-btn' onClick={()=> handleDelete(post.id)}>Delete</button>
                             </div>
                         </div>
                     ))}
