@@ -36,6 +36,7 @@ export default function Posts() {
                                         <strong>Found: </strong>{post.dateTime}<br />
                                         <strong>Gender: </strong>{post.gender}<br />
                                         <strong>Contact me at: </strong>{post.user.phoneNumber} or {post.user.email}<br />
+                                        <strong>{post.user.name}</strong>
                                     </p>
                                 </div>
                             </div>

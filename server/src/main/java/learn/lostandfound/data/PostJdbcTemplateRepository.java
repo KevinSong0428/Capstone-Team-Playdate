@@ -25,20 +25,49 @@ public class PostJdbcTemplateRepository implements PostRepository{
     }
     @Override
     public List<Post> findAll() {
-        final String sql = "SELECT * "
-                + "FROM post "
-                + " JOIN animal ON animal.animal_id = post.animal_id"
-                + " JOIN user ON user.user_id = post.user_id;";
+        final String sql = "SELECT post_id, animal.animal_id as animal_id, animal.`name` as animal_name, " +
+                "animal.characteristics as animal_characteristics, animal.animal as animal_type, animal.breed as animal_breed, u.user_id as user_id, " +
+                "u.`name` as user_name, " +
+                "u.phone as user_phone, " +
+                "u.email as user_email, " +
+                "img_url, " +
+                "`description`, " +
+                "`time`, " +
+                "location.location_id, " +
+                "gender, " +
+                "size, " +
+                "`found` " +
+                "FROM post " +
+                "JOIN animal ON animal.animal_id = post.animal_id " +
+                "JOIN `user` u ON u.user_id = post.user_id " +
+                "JOIN location ON location.location_id = post.location_id;";
         return jdbcTemplate.query(sql, new PostMapper());
     }
 
     @Override
     public Post findByPostId(int postId) {
-        final String sql = "SELECT *"
-                + " FROM post "
-                + " JOIN animal ON animal.animal_id = post.animal_id"
-                + " JOIN user ON user.user_id = post.user_id"
-                + " WHERE post_id = ?;";
+        final String sql = "SELECT post_id, "
+                + "animal.animal_id as animal_id, "
+                + "animal.`name` as animal_name, "
+                + "animal.characteristics as animal_characteristics, "
+                + "animal.animal as animal_type, "
+                + "animal.breed as animal_breed, "
+                + "`user`.user_id as user_id, "
+                + "`user`.`name` as user_name, "
+                + "`user`.phone as user_phone, "
+                + "`user`.email as user_email, "
+                + "img_url, "
+                + "`description`, "
+                + "`time`, "
+                + "location.location_id, "
+                + "gender, "
+                + "size, "
+                + "`found` "
+                + "FROM post "
+                + "JOIN animal ON animal.animal_id = post.animal_id "
+                + "JOIN `user` ON `user`.user_id = post.user_id "
+                + "JOIN location ON location.location_id = post.location_id "
+                + "WHERE post_id = ?;";
         return jdbcTemplate.query(sql, new PostMapper(), postId).stream().findAny().orElse(null);
     }
 
@@ -58,7 +87,7 @@ public class PostJdbcTemplateRepository implements PostRepository{
             ps.setString(3, post.getUrl());
             ps.setString(4, post.getDescription());
             ps.setObject(5, post.getDateTime());
-            ps.setInt(6, post.getLocationId());
+            ps.setInt(6, post.getLocation().getLocationId());
             ps.setString(7, post.getGender());
             ps.setInt(8, post.getSize());
             ps.setBoolean(9, post.isFound());
@@ -82,7 +111,7 @@ public class PostJdbcTemplateRepository implements PostRepository{
 
         return jdbcTemplate.update(sql, post.getAnimal().getAnimalId(), post.getUser().getUserId(),
                 post.getUrl(), post.getDescription(), LocalDateTime.now(),
-                post.getLocationId(), post.getGender(), post.isFound(), post.getId()) > 0;
+                post.getLocation().getLocationId(), post.getGender(), post.isFound(), post.getId()) > 0;
     }
 
     @Override
