@@ -32,12 +32,13 @@ export default function Posts() {
                                 <div className="card-bod">
                                     <h5 className="card-title">{post.found ? "FOUND" : "LOST"}: {post.animal.name} </h5>
                                     <div className="img-container">
-                                        <img src={post.url} alt={`${post.animal.animal}: ${post.animal.characteristic}`} />
+                                        <img src={post.url} alt={`This is a picture of a ${post.animal.animal}: ${post.animal.characteristic}`} />
                                     </div>
                                     <p className="card-text">
                                         <div className="img-container">
                                         </div>
                                         <strong>Description: </strong>{post.description}<br />
+                                        <strong>Weight (lb): </strong>{post.size}<br />
                                         <strong>Found: </strong>{post.dateTime}<br />
                                         <strong>Gender: </strong>{post.gender}<br />
                                         <strong>Contact me at: </strong>{post.user.phoneNumber} or {post.user.email}<br />
