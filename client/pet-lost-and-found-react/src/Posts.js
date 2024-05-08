@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import "./Posts.css"
 export default function Posts() {
     const [posts, setPosts] = useState([]);
 
@@ -32,6 +32,9 @@ export default function Posts() {
                                 <div className="card-bod">
                                     <h5 className="card-title">{post.found ? "FOUND" : "LOST"}: {post.animal.name} </h5>
                                     <p className="card-text">
+                                        <div className="img-container">
+                                        <img src={post.url}/>
+                                        </div>
                                         <strong>Description: </strong>{post.description}<br />
                                         <strong>Found: </strong>{post.dateTime}<br />
                                         <strong>Gender: </strong>{post.gender}<br />
@@ -46,4 +49,3 @@ export default function Posts() {
         </>
     )
 }
-
