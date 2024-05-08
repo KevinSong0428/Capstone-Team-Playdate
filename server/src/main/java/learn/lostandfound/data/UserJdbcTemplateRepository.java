@@ -22,15 +22,23 @@ public class UserJdbcTemplateRepository implements UserRepository{
     @Override
     public List<User> findAll() throws DataAccessException {
 
-        final String sql = "SELECT * "
-                + "FROM user;";
+        final String sql = "SELECT " +
+                "user_id, " +
+                "`user`.name as user_name, " +
+                "`user`.phone, " +
+                "`user`.email " +
+                "FROM user;";
         return jdbcTemplate.query(sql, new UserMapper());
     }
 
     @Override
     public User findById(int id) throws DataAccessException {
-        final String sql = "SELECT * "
-                + "FROM user "
+        final String sql = "SELECT " +
+                "user_id, " +
+                "`user`.name as user_name, " +
+                "`user`.phone, " +
+                "`user`.email " +
+                "FROM user "
                 + "WHERE user_id = ?;";
 
         return jdbcTemplate.query(sql, new UserMapper(), id)

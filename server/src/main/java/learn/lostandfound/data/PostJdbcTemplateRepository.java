@@ -25,49 +25,64 @@ public class PostJdbcTemplateRepository implements PostRepository{
     }
     @Override
     public List<Post> findAll() {
-        final String sql = "SELECT post_id, animal.animal_id as animal_id, animal.`name` as animal_name, " +
-                "animal.characteristics as animal_characteristics, animal.animal as animal_type, animal.breed as animal_breed, u.user_id as user_id, " +
-                "u.`name` as user_name, " +
-                "u.phone as user_phone, " +
-                "u.email as user_email, " +
-                "img_url, " +
-                "`description`, " +
-                "`time`, " +
+        final String sql = "SELECT " +
+                "post.post_id, " +
+                "animal.animal_id, " +
+                "animal.name as animal_name, " +
+                "animal.characteristics, " +
+                "animal.animal as animal, " +
+                "animal.breed as breed, " +
+                "u.user_id as user_id, " +
+                "u.name as user_name, " +
+                "u.phone as phone, " +
+                "u.email as email, " +
+                "post.img_url, " +
+                "post.description, " +
+                "post.time, " +
                 "location.location_id, " +
-                "gender, " +
-                "size, " +
-                "`found` " +
+                "location.address, " +
+                "location.city, " +
+                "location.state, " +
+                "location.zip_code, " +
+                "post.gender, " +
+                "post.size, " +
+                "post.found " +
                 "FROM post " +
                 "JOIN animal ON animal.animal_id = post.animal_id " +
-                "JOIN `user` u ON u.user_id = post.user_id " +
+                "JOIN user u ON u.user_id = post.user_id " +
                 "JOIN location ON location.location_id = post.location_id;";
         return jdbcTemplate.query(sql, new PostMapper());
     }
 
     @Override
     public Post findByPostId(int postId) {
-        final String sql = "SELECT post_id, "
-                + "animal.animal_id as animal_id, "
-                + "animal.`name` as animal_name, "
-                + "animal.characteristics as animal_characteristics, "
-                + "animal.animal as animal_type, "
-                + "animal.breed as animal_breed, "
-                + "`user`.user_id as user_id, "
-                + "`user`.`name` as user_name, "
-                + "`user`.phone as user_phone, "
-                + "`user`.email as user_email, "
-                + "img_url, "
-                + "`description`, "
-                + "`time`, "
-                + "location.location_id, "
-                + "gender, "
-                + "size, "
-                + "`found` "
-                + "FROM post "
-                + "JOIN animal ON animal.animal_id = post.animal_id "
-                + "JOIN `user` ON `user`.user_id = post.user_id "
-                + "JOIN location ON location.location_id = post.location_id "
-                + "WHERE post_id = ?;";
+        final String sql = "SELECT " +
+                "post.post_id, " +
+                "animal.animal_id, " +
+                "animal.name as animal_name, " +
+                "animal.characteristics, " +
+                "animal.animal, " +
+                "animal.breed, " +
+                "`user`.user_id, " +
+                "`user`.name as user_name, " +
+                "`user`.phone, " +
+                "`user`.email, " +
+                "img_url, " +
+                "description, " +
+                "time, " +
+                "location.location_id, " +
+                "location.address, " + // Added missing fields from the location table
+                "location.city, " +
+                "location.state, " +
+                "location.zip_code, " +
+                "gender, " +
+                "size, " +
+                "found " +
+                "FROM post " +
+                "JOIN animal ON animal.animal_id = post.animal_id " +
+                "JOIN `user` ON `user`.user_id = post.user_id " +
+                "JOIN location ON location.location_id = post.location_id " +
+                "WHERE post.post_id = ?;";
         return jdbcTemplate.query(sql, new PostMapper(), postId).stream().findAny().orElse(null);
     }
 
