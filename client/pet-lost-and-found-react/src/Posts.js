@@ -8,22 +8,22 @@ export default function Posts() {
     const postRefs = useRef(new Map());
 
 
-  const url = "http://localhost:8080/api/post";
+    const url = "http://localhost:8080/api/post";
     const navigate = useNavigate();
 
     //fetch data
-  useEffect(() => {
-    fetch(url)
-      .then((response) => {
-        if (response.status === 200) {
-          return response.json();
-        } else {
-          return Promise.reject(`Unexpected status code: ${response.status}`);
-        }
-      })
-      .then((data) => setPosts(data)) // here we are setting our data to our state variable
-      .catch(console.log);
-  }, []);
+    useEffect(() => {
+        fetch(url)
+            .then((response) => {
+                if (response.status === 200) {
+                    return response.json();
+                } else {
+                    return Promise.reject(`Unexpected status code: ${response.status}`);
+                }
+            })
+            .then((data) => setPosts(data)) // here we are setting our data to our state variable
+            .catch(console.log);
+    }, []);
 
     const handleDelete = (postId) => {
         const post = posts.find(post => post.id === postId);
@@ -44,14 +44,14 @@ export default function Posts() {
                 });
                 const init = { method: "DELETE" };
                 fetch(`${url}/${postId}`, init)
-                .then(response => {
-                    if (response.status === 204) {
-                        // This is handled by the onComplete of the animation
-                    } else {
-                        throw new Error(`Unexpected Status Code: ${response.status}`);
-                    }
-                })
-                .catch(console.error);
+                    .then(response => {
+                        if (response.status === 204) {
+                            // This is handled by the onComplete of the animation
+                        } else {
+                            throw new Error(`Unexpected Status Code: ${response.status}`);
+                        }
+                    })
+                    .catch(console.error);
             }
         }
     };
@@ -82,12 +82,13 @@ export default function Posts() {
                                         <strong>{post.user.name}</strong>
                                     </p>
                                 </div>
-                            <button className='btn btn-danger btn-sm delete-btn' onClick={()=> handleDelete(post.id)}>Delete</button>
+                                <Link className="btn btn-primary btn-sm" to={`/posts/edit/${post.id}`}>Edit</Link>
+                                <button className='btn btn-danger btn-sm delete-btn' onClick={() => handleDelete(post.id)}>Delete</button>
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
-    </>
-  );
+        </>
+    );
 }

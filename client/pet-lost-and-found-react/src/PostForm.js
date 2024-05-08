@@ -117,19 +117,20 @@ function PostForm() {
     const addAnimal = async () => {
         console.log("Creating animal");
         const init = {
-            method: 'POST',
+            method: post.animal.animalId ? "PUT" : 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(post.animal)
         };
         try {
-            const response = await fetch(animalUrl, init);
-            const data = await response.json();
-
+            const response = await fetch(post.animal.animalId ? `${animalUrl}/${post.animal.animalId}` : animalUrl, init);
             if (!response.ok) {
-                throw new Error(`Failed to create animal: ${response.status}`);
+                throw new Error(`Failed to ${post.animal.animalId ? 'update' : 'create'} animal: ${response.status}`);
             }
+            console.log(response)
+
+            const data = await response.json();
 
             if (!data.animalId) {
                 setErrors(data);
@@ -138,26 +139,27 @@ function PostForm() {
                 post.animal.animalId = data.animalId;
             }
         } catch (error) {
-            console.error('Error creating animal:', error);
+            console.error(`Error ${post.animal.animalId ? 'updating' : 'creating'} animal: `, error);
         }
     }
 
     const addUser = async () => {
         console.log("Creating user");
         const init = {
-            method: 'POST',
+            method: post.user.userId ? 'PUT' : 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(post.user)
         };
         try {
-            const response = await fetch(userUrl, init);
-            const data = await response.json();
+            const response = await fetch(post.user.userId ? `${userUrl}/${post.user.userId}` : userUrl, init);
 
             if (!response.ok) {
-                throw new Error(`Failed to create user: ${response.status}`);
+                throw new Error(`Failed to ${post.user.userId ? 'update' : 'create'} user: ${response.status}`);
             }
+
+            const data = await response.json();
 
             if (!data.userId) {
                 setErrors(data);
@@ -166,26 +168,27 @@ function PostForm() {
                 post.user.userId = data.userId;
             }
         } catch (error) {
-            console.error('Error creating user:', error);
+            console.error(`Error ${post.user.userId ? 'updating' : 'creating'} user: `, error);
         }
     }
 
     const addLocation = async () => {
         console.log("Creating location");
         const init = {
-            method: 'POST',
+            method: post.location.locationId ? "PUT" : 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(post.location)
         };
         try {
-            const response = await fetch(locationUrl, init);
-            const data = await response.json();
+            const response = await fetch(post.location.locationId ? `${locationUrl}/${post.location.locationId}` : locationUrl, init);
 
             if (!response.ok) {
-                throw new Error(`Failed to create location: ${response.status}`);
+                throw new Error(`Failed to ${post.location.locationId ? 'update' : 'create'} location: ${response.status}`);
             }
+
+            const data = await response.json();
 
             if (!data.locationId) {
                 setErrors(data);
@@ -194,26 +197,30 @@ function PostForm() {
                 post.location.locationId = data.locationId;
             }
         } catch (error) {
-            console.error('Error creating location:', error);
+            console.error(`Error ${post.location.locationId ? 'updating' : 'creating'} location: `, error);
         }
     }
 
     const addPost = async () => {
         console.log("Creating post")
+        if (id) {
+            post.id = id;
+        }
         const init = {
-            method: 'POST',
+            method: id ? "PUT" : 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(post)
         };
         try {
-            const response = await fetch(postUrl, init);
-            const data = await response.json();
+            const response = await fetch(id ? `${postUrl}/${id}` : postUrl, init);
 
             if (!response.ok) {
-                throw new Error(`Failed to create post: ${response.status}`);
+                throw new Error(`Failed to ${id ? 'update' : 'create'} post: ${response.status}`);
             }
+
+            const data = await response.json();
 
             if (data.id) {
                 navigate('/');
@@ -221,31 +228,20 @@ function PostForm() {
                 setErrors(data);
             }
         } catch (error) {
-            console.error('Error creating post:', error);
+            console.error(`Error ${id ? 'updating' : 'creating'} post: `, error);
         }
     }
 
-    const updatePost = () => {
-
-    }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (id) {
-            updatePost();
-        } else {
-            try {
-                await addAnimal();
-                await addUser();
-                await addLocation();
-                await addPost();
-            } catch (error) {
-                console.error('Error submitting post:', error);
-            }
+        try {
+            await addAnimal();
+            await addUser();
+            await addLocation();
+            await addPost();
+        } catch (error) {
+            console.error('Error submitting post:', error);
         }
-    }
-
-    const handleBlur = () => {
-        setInputTouched(true);
     }
 
     const resetState = () => {
@@ -433,10 +429,9 @@ function PostForm() {
                                 id='dateTime'
                                 name='dateTime'
                                 type='datetime-local'
-                                className={`form form-control ${inputTouched && post.dateTime === '' ? 'invalid' : ''}`}
+                                className={`form form-control]`}
                                 value={post.dateTime || ''}
                                 onChange={handleChange}
-                                onBlur={handleBlur}
                             />
                         </div>
                         <div className='form-group'>
@@ -447,7 +442,7 @@ function PostForm() {
                                     name='gender'
                                     type='radio'
                                     className='form-check-input'
-                                    value='female'
+                                    value="female"
                                     checked={post.gender === 'female'}
                                     onChange={handleChange}
                                 />
@@ -460,7 +455,7 @@ function PostForm() {
                                     name='gender'
                                     type='radio'
                                     className='form-check-input'
-                                    value='male'
+                                    value="male"
                                     checked={post.gender === 'male'}
                                     onChange={handleChange}
                                 />
@@ -473,7 +468,7 @@ function PostForm() {
                                     name='gender'
                                     type='radio'
                                     className='form-check-input'
-                                    value='unknown'
+                                    value="unknown"
                                     checked={post.gender === 'unknown'}
                                     onChange={handleChange}
                                 />
@@ -510,8 +505,8 @@ function PostForm() {
                     </fieldset>
 
                     <div className='mt-4'>
-                        <button className='btn btn-success mr-2' type="submit">{updatePost > 0 ? 'Update Post' : 'Add Post'}</button>
-                        <button className='btn btn-warning' type="button" onClick={resetState}>Cancel</button>
+                        <button className='btn btn-success mr-2' type="submit">{id > 0 ? 'Update Post' : 'Add Post'}</button>
+                        <Link className='btn btn-warning' type="button" to={"/"}>Cancel</Link>
                     </div>
                 </form>
             </main>
