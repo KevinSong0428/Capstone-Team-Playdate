@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-// import { Link } from "react-router-dom";
-
+import { Link } from "react-router-dom";
+import "./Posts.css"
 export default function Posts() {
   const [posts, setPosts] = useState([]);
 
@@ -19,37 +19,34 @@ export default function Posts() {
       .catch(console.log);
   }, []);
 
-  return (
-    <>
-      <div className='container mt-5'>
-        <div className='row'>
-          <h2 className='flex-grow'>All Posts</h2>
-        </div>
-        <div className='row'>
-          {posts.map((post) => (
-            <div
-              key={post.postId}
-              className='col-lg-4 mb-4'
-            >
-              <div className='card'>
-                <div className='card-bod'>
-                  <h5 className='card-title'>
-                    {post.found ? "FOUND" : "LOST"}: {post.animal.name}{" "}
-                  </h5>
-                  <p className='card-text'>
-                    <strong>Description: </strong>
-                    {post.description}
-                    <br />
-                    <strong>Found: </strong>
-                    {post.dateTime}
-                    <br />
-                    <strong>Gender: </strong>
-                    {post.gender}
-                    <br />
-                    <strong>Contact me at: </strong>
-                    {post.user.phoneNumber} or {post.user.email}
-                    <br />
-                  </p>
+    return (
+        <>
+            <div className="container mt-5">
+                <div className="row">
+                    <h2 className="flex-grow">All Posts</h2>
+                </div>
+                <div className="row">
+                    {posts.map(post => (
+                        <div key={post.postId} className="col-lg-4 mb-4">
+                            <div className="card">
+                                <div className="card-bod">
+                                    <h5 className="card-title">{post.found ? "FOUND" : "LOST"}: {post.animal.name} </h5>
+                                    <div className="img-container">
+                                        <img src={post.url} alt={`${post.animal.animal}: ${post.animal.characteristic}`} />
+                                    </div>
+                                    <p className="card-text">
+                                        <div className="img-container">
+                                        </div>
+                                        <strong>Description: </strong>{post.description}<br />
+                                        <strong>Found: </strong>{post.dateTime}<br />
+                                        <strong>Gender: </strong>{post.gender}<br />
+                                        <strong>Contact me at: </strong>{post.user.phoneNumber} or {post.user.email}<br />
+                                        <strong>{post.user.name}</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
               </div>
             </div>

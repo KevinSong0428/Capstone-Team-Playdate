@@ -159,7 +159,7 @@ export default function Home() {
           )}
         </div>
       </div>
-      <posts></posts>
+      <Posts/>
     </div>
   );
 }
