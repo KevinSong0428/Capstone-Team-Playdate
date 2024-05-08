@@ -7,26 +7,23 @@ export default function Posts() {
     const [posts, setPosts] = useState([]);
     const postRefs = useRef(new Map());
 
-    const url = "http://localhost:8080/api/post";
 
+  const url = "http://localhost:8080/api/post";
     const navigate = useNavigate();
 
     //fetch data
-    useEffect(() => {
-        fetch(url)
-            .then(response => {
-                if (response.status === 200) {
-                    return response.json();
-                } else {
-                    return Promise.reject(`Unexpected status code: ${response.status}`);
-                }
-            })
-            .then(data => {
-                console.log(data); // Add this line to see what data structure is being returned
-                setPosts(data);
-            }) // here we are setting our data to our state variable
-            .catch(console.log);
-    }, []);
+  useEffect(() => {
+    fetch(url)
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          return Promise.reject(`Unexpected status code: ${response.status}`);
+        }
+      })
+      .then((data) => setPosts(data)) // here we are setting our data to our state variable
+      .catch(console.log);
+  }, []);
 
     const handleDelete = (postId) => {
         const post = posts.find(post => post.id === postId);
@@ -72,12 +69,13 @@ export default function Posts() {
                                 <div className="card-bod">
                                     <h5 className="card-title">{post.found ? "FOUND" : "LOST"}: {post.animal.name} </h5>
                                     <div className="img-container">
-                                        <img src={post.url} alt={`${post.animal.animal}: ${post.animal.characteristic}`} />
+                                        <img src={post.url} alt={`This is a picture of a ${post.animal.animal}: ${post.animal.characteristic}`} />
                                     </div>
                                     <p className="card-text">
                                         <div className="img-container">
                                         </div>
                                         <strong>Description: </strong>{post.description}<br />
+                                        <strong>Weight (lb): </strong>{post.size}<br />
                                         <strong>Found: </strong>{post.dateTime}<br />
                                         <strong>Gender: </strong>{post.gender}<br />
                                         <strong>Contact me at: </strong>{post.user.phoneNumber} or {post.user.email}<br />
@@ -90,6 +88,6 @@ export default function Posts() {
                     ))}
                 </div>
             </div>
-        </>
-    )
+    </>
+  );
 }
