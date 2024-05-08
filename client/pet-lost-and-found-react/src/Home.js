@@ -63,7 +63,7 @@ export default function Home() {
 
   const flowUp = (onComplete) => {
     timeline
-      .to(elems.current[0], { y: "-0%", opacity: 0, scale: -0.5 })
+      .to(elems.current[0], { y: "-100%", opacity: 0, scale: -0.5 })
       .to(
         elems.current[1],
         {
@@ -146,20 +146,20 @@ export default function Home() {
             index === state.current ? (
               <span
                 key={`stripe${index}`}
-                onClick={() => handleChange(index)}
+                // onClick={() => handleChange(index)}
                 style={{ opacity: 1 }}
               ></span>
             ) : (
               <span
                 key={`stripe${index}`}
-                onClick={() => handleChange(index)}
+                // onClick={() => handleChange(index)}
                 style={{ opacity: 0.2 }}
               ></span>
             )
           )}
         </div>
       </div>
-      <Posts/>
+      <Posts />
     </div>
   );
 }

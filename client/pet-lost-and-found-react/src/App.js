@@ -13,8 +13,9 @@ function App() {
             <Navbar/>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/post/add" element={<PostForm />} />
-                <Route path="/post" element={<Posts />} />
+                <Route path="posts/add" element={<PostForm />} />
+                <Route path="posts/edit/:id" element={<PostForm />} />
+                <Route path="/posts" element={<Posts />} />
             </Routes>
         </Router>
     );
