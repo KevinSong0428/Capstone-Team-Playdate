@@ -90,60 +90,74 @@ export default function Posts({ searchTerm }) {
         });
     };
 
-  return (
-    <>
-      <div className='container mt-5'>
-        <div className='row'>
-          <h2 className='flex-grow'>All Posts</h2>
-        </div>
-        <div className='row'>
-          {posts.map((post) => (
-            <div
-              key={post.id}
-              className='col-lg-4 mb-4'
-              ref={(el) => postRefs.current.set(post.id, el)}
-            >
-              <div className='card'>
-                <div
-                  className='card-bod'
-                  onClick={() => handleOpenModal(post.id)}
-                  style={{ cursor: "pointer" }}
-                >
-                  <h5 className='card-title'>
-                    {post.found ? "FOUND" : "MISSING"}{" "}
-                    {post.animal.animal.toUpperCase()}{" "}
-                  </h5>
-                  <div className='img-container'>
-                    <img
-                      src={post.url}
-                      onError={(e) => {
-                        e.currentTarget.src =
-                          "https://t3.ftcdn.net/jpg/02/82/41/14/360_F_282411446_ISWNhmJm0no0eN5tUvCZk8LepeOxourx.jpg";
-                      }}
-                      alt={`${post.animal.animal}: ${post.animal.characteristic}`}
-                    />
-                  </div>
-                  <p className='card-text'>
-                    <strong>Name: </strong>
-                    {post.animal.name ? post.animal.name : "No Tag"}
-                    <br />
-                    <strong>Breed: </strong>
-                    {post.animal.breed ? post.animal.breed : "???"}
-                    <br />
-                    <strong>Description: </strong>
-                    {post.description.length > 20
-                      ? post.description.substring(0, 20) + "..."
-                      : post.description}
-                    <br />
-                    <strong>Time Found: </strong>
-                    {formatDateTime(post.dateTime)}
-                    <br />
-                    <strong>Contact {post.user.name} at: </strong>
-                    <br />
-                    {post.user.phoneNumber} <br />
-                    {post.user.email}
-                    <br />
-                  </p>
+    return (
+        <>
+            <div className='container mt-5'>
+                <div className='row'>
+                    <h2 className='flex-grow'>All Posts</h2>
+                </div>
+                <div className='row'>
+                    {posts.map((post) => (
+                        <div
+                            key={post.id}
+                            className='col-lg-4 mb-4'
+                            ref={(el) => postRefs.current.set(post.id, el)}
+                        >
+                            <div className='card'>
+                                <div
+                                    className='card-bod'
+                                    onClick={() => handleOpenModal(post.id)}
+                                    style={{ cursor: "pointer" }}
+                                >
+                                    <h5 className='card-title'>
+                                        {post.found ? "FOUND" : "MISSING"}{" "}
+                                        {post.animal.animal.toUpperCase()}{" "}
+                                    </h5>
+                                    <div className='img-container'>
+                                        <img
+                                            src={post.url}
+                                            onError={(e) => {
+                                                e.currentTarget.src =
+                                                    "https://t3.ftcdn.net/jpg/02/82/41/14/360_F_282411446_ISWNhmJm0no0eN5tUvCZk8LepeOxourx.jpg";
+                                            }}
+                                            alt={`${post.animal.animal}: ${post.animal.characteristic}`}
+                                        />
+                                    </div>
+                                    <p className='card-text'>
+                                        <strong>Name: </strong>
+                                        {post.animal.name ? post.animal.name : "No Tag"}
+                                        <br />
+                                        <strong>Breed: </strong>
+                                        {post.animal.breed ? post.animal.breed : "???"}
+                                        <br />
+                                        <strong>Description: </strong>
+                                        {post.description.length > 20
+                                            ? post.description.substring(0, 20) + "..."
+                                            : post.description}
+                                        <br />
+                                        <strong>Time Found: </strong>
+                                        {formatDateTime(post.dateTime)}
+                                        <br />
+                                        <strong>Contact {post.user.name} at: </strong>
+                                        <br />
+                                        {post.user.phoneNumber} <br />
+                                        {post.user.email}
+                                        <br />
+                                    </p>
+                                    <div className='button-container mb-4'>
+                                        <Link
+                                            className='edit btn btn-primary btn-sm'
+                                            to={`/posts/edit/${post.id}`}
+                                        >
+                                            Edit
+                                        </Link>
+                                        <button
+                                            className='delete btn btn-danger btn-sm delete-btn'
+                                            onClick={() => handleDelete(post.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
 
                                 </div>
                             </div>
