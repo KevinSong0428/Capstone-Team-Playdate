@@ -1,52 +1,68 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function Navbar({ onSearch }) {
-  const [searchTerm, setSearchTerm] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
 
-  const handleInputChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
+    const handleInputChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
 
-  const handleSearch = () => {
-    onSearch(searchTerm);
-  };
+    useEffect(() => {
+        onSearch(searchTerm);
+    }, [searchTerm, onSearch]);
 
-  return (
-    <header className="navbar">
-      <div className="navbar-section">
-        <Link to="/" className="navbar-brand">
-          <img
-            src="https://cdn.discordapp.com/attachments/1167573430388924557/1237979456996638730/Screenshot_2024-05-08_at_9.02.43_PM.png"
-            alt="Lost Paws Logo"
-            style={{ width: "50px" }}
-          />
-          <h1>Lost Paws</h1>
-        </Link>
-      </div>
+    const handleKeyPress = (event) => {
+        if (event.key === "Enter") {
+            onSearch(searchTerm);
+        }
+    };
 
-      <div className="navbar-section search-bar">
-        <input
-          className="form-control"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-          value={searchTerm}
-          onChange={handleInputChange}
-          onKeyPress={event => event.key === 'Enter' && handleSearch()} 
-        />
-        <button onClick={handleSearch} className="search-button">Search</button>
-      </div>
+    const handleSearchButtonClick = () => {
+        onSearch(searchTerm);
+    };
 
-      <div className="navbar-section">
-        <nav>
-          <Link to="/posts/add" className="nav-link">
-            Make A Report
-          </Link>
-        </nav>
-      </div>
-    </header>
-  );
+    return (
+        <header className="navbar">
+            <div className="navbar-section">
+                <Link to="/" className="navbar-brand">
+                    <img
+                        className="rounded-circle"
+                        src="https://scontent-lga3-2.xx.fbcdn.net/v/t39.30808-6/405011549_821946389937052_8724288446210311245_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=sCR5IraClrYQ7kNvgExE73f&_nc_ht=scontent-lga3-2.xx&oh=00_AYAkHy0Xx6UXCj9192tllM0m2CjFzM3ArN5F9HHs_Jb4bA&oe=6642F147"
+                        alt="Lost Paws Logo"
+                        style={{ width: "50px", height: "50px" }}
+                    />
+                    <h1>Lost Paws</h1>
+                </Link>
+            </div>
+
+            <div className="navbar-section search-bar">
+                <input
+                    className="form-control"
+                    type="search"
+                    placeholder="Search for your pet..."
+                    aria-label="Search"
+                    value={searchTerm}
+                    onChange={handleInputChange}
+                    onKeyPress={handleKeyPress}
+                />
+                <button
+                    onClick={handleSearchButtonClick}
+                    className="search-button btn btn-success"
+                >
+                    Search
+                </button>
+            </div>
+
+            <div className="navbar-section">
+                <nav>
+                    <Link to="/posts/add" className="nav-link btn btn-danger">
+                        Make A Report
+                    </Link>
+                </nav>
+            </div>
+        </header >
+    );
 }
 
 export default Navbar;

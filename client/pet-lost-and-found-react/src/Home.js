@@ -1,9 +1,9 @@
-import React, { useState, useLayoutEffect, useRef } from "react";
+import React, { useState, useLayoutEffect, useRef, useEffect } from "react";
 import gsap from "gsap";
 import "./styles.css";
 import Posts from "./Posts";
 
-export default function Home() {
+export default function Home({ searchTerm }) {
     let timer = null;
     let elems = useRef([]);
     let timeline = gsap.timeline({
@@ -94,29 +94,8 @@ export default function Home() {
         flowUp(() => calculateIndexs(state.next));
     };
 
-    useLayoutEffect(() => {
-        const image1 = !!elems.current[0] && elems.current[0];
-        const image2 = !!elems.current[1] && elems.current[1];
-
-        activateTimer();
-
-        gsap.set(image2, { y: "0%", opacity: 0, scale: 1 });
-        if (userDetected) {
-            gsap.set(image1, { y: "0%", opacity: 0, scale: 1 });
-        } else {
-            gsap.set(image1, { y: "0%", opacity: 1, scale: 1 });
-        }
-
-        return () => {
-            clearTimeout(timer);
-        };
-    }, [state]);
-
-    // console.log(state);
-
-    return (
-        <div className='Home'>
-          
+    const displayCarousel = () => {
+        return (
             <div className='album-container'>
                 <div className='image'>
                     <img
@@ -152,7 +131,35 @@ export default function Home() {
                     )}
                 </div>
             </div>
-            <Posts />
+        )
+    }
+
+    useLayoutEffect(() => {
+        const image1 = !!elems.current[0] && elems.current[0];
+        const image2 = !!elems.current[1] && elems.current[1];
+
+        activateTimer();
+
+        gsap.set(image2, { y: "0%", opacity: 0, scale: 1 });
+        if (userDetected) {
+            gsap.set(image1, { y: "0%", opacity: 0, scale: 1 });
+        } else {
+            gsap.set(image1, { y: "0%", opacity: 1, scale: 1 });
+        }
+
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [state]);
+
+    return (
+        <div className='Home'>
+            <div className="carousel-container">
+                {searchTerm ? "" : displayCarousel()}
+            </div>
+            <div className="home-container">
+                <Posts searchTerm={searchTerm} />
+            </div>
         </div>
     );
 }
