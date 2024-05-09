@@ -84,3 +84,15 @@
   font-size: 2rem;
   color: red;
 }
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 350px;
+}
+.edit {
+  margin-left: 27px;
+}
+.delete {
+  margin-right: 20px;
+}
