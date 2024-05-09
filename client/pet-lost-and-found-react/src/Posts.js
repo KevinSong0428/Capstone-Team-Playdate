@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import gsap from "gsap";
 import "./Posts.css";
 
@@ -7,7 +7,6 @@ export default function Posts() {
     const [posts, setPosts] = useState([]);
     const postRefs = useRef(new Map());
     const url = "http://localhost:8080/api/post";
-    const navigate = useNavigate();
 
     //fetch data
     useEffect(() => {
@@ -81,18 +80,14 @@ export default function Posts() {
                                 <div className="card-bod">
                                     <h5 className="card-title">{post.found ? "FOUND" : "MISSING"} {post.animal.animal.toUpperCase()} </h5>
                                     <div className="img-container">
-                                        <img src={post.url} alt={`This is a picture of a ${post.animal.animal}: ${post.animal.characteristic}`} />
+                                        <img src={post.url} alt={`${post.animal.animal}: ${post.animal.characteristic}`} />
                                     </div>
                                     <p className="card-text">
-                                        <div className="img-container">
-                                        </div>
                                         <strong>Name: </strong>{post.animal.name ? post.animal.name : "No Tag"}<br />
                                         <strong>Breed: </strong>{post.animal.breed ? post.animal.breed : "???"}<br />
                                         <strong>Description: </strong>{post.description.length > 20 ? post.description.substring(0, 20) + "..." : post.description}<br />
                                         <strong>Time Found: </strong>{formatDateTime(post.dateTime)}<br />
                                         <strong>Contact {post.user.name} at: </strong><br />{post.user.phoneNumber} <br />{post.user.email}<br />
-
-                                        <strong><br />Stuff to add to modal:<br /> Weight (lb): </strong>{post.size} <br /> <strong>Gender: </strong>{post.gender}<br />
                                     </p>
                                 </div>
                                 <Link className="btn btn-primary btn-sm" to={`/posts/edit/${post.id}`}>Edit</Link>
