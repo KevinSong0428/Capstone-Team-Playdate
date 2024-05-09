@@ -445,6 +445,7 @@ function PostForm() {
                                 className={`form form-control]`}
                                 value={post.dateTime || ''}
                                 onChange={handleChange}
+                                max={new Date().toISOString().split('.')[0]}
                             />
                         </div>
                         <div className='form-group'>
