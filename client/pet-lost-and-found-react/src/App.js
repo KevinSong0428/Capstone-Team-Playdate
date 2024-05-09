@@ -7,6 +7,7 @@ import Posts from './Posts';
 import PostForm from './PostForm';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import NotFound from './NotFound';
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                 <Route path="posts/add" element={<PostForm />} />
                 <Route path="posts/edit/:id" element={<PostForm />} />
                 <Route path="/posts" element={<Posts />} />
+                <Route path="*" element={<NotFound/>}/>
             </Routes>
             <Footer/>
         </Router>

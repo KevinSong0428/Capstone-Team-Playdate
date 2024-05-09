@@ -1,0 +1,11 @@
+.not-found-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+}
+.not-found-img-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
