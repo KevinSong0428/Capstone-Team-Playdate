@@ -121,3 +121,15 @@
 .navbar{
   background-color: #2d394b;
 }
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 350px;
+}
+.edit {
+  margin-left: 27px;
+}
+.delete {
+  margin-right: 20px;
+}

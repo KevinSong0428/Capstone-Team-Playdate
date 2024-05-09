@@ -5,7 +5,7 @@ import Modal from "./Modal";
 import Post from "./Post";
 import "./Posts.css";
 
-export default function Posts() {
+export default function Posts({ searchTerm }) {
     const [posts, setPosts] = useState([]);
     const postRefs = useRef(new Map());
     const url = "http://localhost:8080/api/post";
@@ -26,6 +26,15 @@ export default function Posts() {
             .then((data) => setPosts(data)) // here we are setting our data to our state variable
             .catch(console.log);
     }, []);
+
+    useEffect(() => {
+        const filteredPosts = posts.filter(post =>
+            (post.animal.name && post.animal.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
+            (post.animal.breed && post.animal.breed.toLowerCase().includes(searchTerm.toLowerCase()))
+        );
+        setPosts(filteredPosts);
+    }, [searchTerm]);
+
 
     const handleDelete = (postId) => {
         const post = posts.find((post) => post.id === postId);
@@ -104,8 +113,15 @@ export default function Posts() {
                                         {post.found ? "FOUND" : "MISSING"}{" "}
                                         {post.animal.animal.toUpperCase()}{" "}
                                     </h5>
-                                    <div className="img-container">
-                                        <img src={post.url} alt={`${post.animal.animal}: ${post.animal.characteristic}`} />
+                                    <div className='img-container'>
+                                        <img
+                                            src={post.url}
+                                            onError={(e) => {
+                                                e.currentTarget.src =
+                                                    "https://t3.ftcdn.net/jpg/02/82/41/14/360_F_282411446_ISWNhmJm0no0eN5tUvCZk8LepeOxourx.jpg";
+                                            }}
+                                            alt={`${post.animal.animal}: ${post.animal.characteristic}`}
+                                        />
                                     </div>
                                     <p className='card-text'>
                                         <strong>Name: </strong>
@@ -128,19 +144,22 @@ export default function Posts() {
                                         {post.user.email}
                                         <br />
                                     </p>
+                                    <div className='button-container mb-4'>
+                                        <Link
+                                            className='edit btn btn-primary btn-sm'
+                                            to={`/posts/edit/${post.id}`}
+                                        >
+                                            Edit
+                                        </Link>
+                                        <button
+                                            className='delete btn btn-danger btn-sm delete-btn'
+                                            onClick={() => handleDelete(post.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+
                                 </div>
-                            <Link
-                                className='btn btn-primary btn-sm'
-                                to={`/posts/edit/${post.id}`}
-                            >
-                                Edit
-                            </Link>
-                            <button
-                                className='btn btn-danger btn-sm delete-btn'
-                                onClick={() => handleDelete(post.id)}
-                            >
-                                Delete
-                            </button>
                             </div>
                         </div>
                     ))}
