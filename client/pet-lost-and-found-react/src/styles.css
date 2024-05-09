@@ -1,6 +1,7 @@
 .carousel-container {
     /* border-bottom: 20px solid gray; */
     background-color: #f3f3f3c6;
+
 }
 
 .album-container {
@@ -172,8 +173,15 @@
     background-size: cover;
     opacity: 0.1;
     z-index: -1;
-    background-size: 100%;
+    background-size: 120%;
 }
 .row{
     background-color: white;
+}
+.album-container{
+    /* width: 100%; */
+
+}
+.carousel-container{
+    height: 60%;
 }
