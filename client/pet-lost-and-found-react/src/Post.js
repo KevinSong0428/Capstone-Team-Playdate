@@ -57,6 +57,10 @@ function Post({ postId }) {
                 <div className='modal-img-container'>
                   <img
                     src={post.url}
+                    onError={(e) => {
+                      e.currentTarget.src =
+                        "https://t3.ftcdn.net/jpg/02/82/41/14/360_F_282411446_ISWNhmJm0no0eN5tUvCZk8LepeOxourx.jpg";
+                    }}
                     alt={`This is a picture of a ${post.animal.animal}: ${post.animal.characteristic}`}
                   />
                 </div>
