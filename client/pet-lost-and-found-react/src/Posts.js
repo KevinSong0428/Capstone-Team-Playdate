@@ -100,20 +100,10 @@ export default function Posts() {
                                 <div className="card-bod" onClick={() => handleOpenModal(post.id)} style={{ cursor: 'pointer' }}>
                                     <h5 className="card-title">{post.found ? "FOUND" : "MISSING"} {post.animal.animal.toUpperCase()} </h5>
 
-                                    <p className="card-text">
-                                    <div className="img-container">
-                                    </div>
-
-                                    <strong>Description: </strong>{post.description}<br />
-                                    <strong>Weight (lb): </strong>{post.size}<br />
-                                    <strong>Time Found: </strong>{post.dateTime}<br />
-                                    <strong>Gender: </strong>{post.gender}<br />
-                                    <strong>Contact {post.user.name} at: </strong>{post.user.phoneNumber} or {post.user.email}<br />
-                                </p>
                             </div>
 
                                     <p className="card-text">
-                  
+
                                         <strong>Name: </strong>{post.animal.name ? post.animal.name : "No Tag"}<br />
                                         <strong>Breed: </strong>{post.animal.breed ? post.animal.breed : "???"}<br />
                                         <strong>Description: </strong>{post.description.length > 20 ? post.description.substring(0, 20) + "..." : post.description}<br />
@@ -127,14 +117,15 @@ export default function Posts() {
                                 <Link className="btn btn-primary btn-sm" to={`/posts/edit/${post.id}`}>Edit</Link>
                                 <button className='btn btn-danger btn-sm delete-btn' onClick={() => handleDelete(post.id)}>Delete</button>
                             </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            <Modal show={showModal} onClose={handleCloseModal}>
+         </div>
+                <Modal show={showModal} onClose={handleCloseModal}>
                 {selectedPostId && <Post postId={selectedPostId} />}
             </Modal>
+            </div>
+                    ))}
+
+
+                        
 
         </>
     );
