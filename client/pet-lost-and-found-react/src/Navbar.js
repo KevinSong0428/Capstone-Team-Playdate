@@ -13,13 +13,13 @@ function Navbar() {
           </Link>
           <Link
             className='nav-link'
-            to={"/post"}
+            to={"/posts"}
           >
             Posts
           </Link>
           <Link
             className='nav-post'
-            to={"/post/add"}
+            to={"/posts/add"}
           >
             Make A Report
           </Link>
