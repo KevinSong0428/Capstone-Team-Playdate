@@ -116,7 +116,7 @@ export default function Home() {
 
     return (
         <div className='Home'>
-            <h2>Home Page</h2>
+          
             <div className='album-container'>
                 <div className='image'>
                     <img

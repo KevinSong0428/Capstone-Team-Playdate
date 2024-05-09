@@ -66,21 +66,58 @@
 
 .nav {
   display: flex;
-  justify-content: right;
-  margin-right: 20%;
+  justify-content: flex-end;
+  margin-right: 10%;
 }
 
 .nav-link {
   margin-right: 20px;
-  color: yellow;
+  color: #b2e8f9;
 }
 
 .nav-container {
-  background-color: blue;
-  padding: 40px 0;
+  background-color:#2d394b;
+  background-color: black;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 3rem;
 }
 
 .nav-post {
-  font-size: 2rem;
-  color: red;
+  font-size: 1.5rem;
+  color: white;
+}
+.nav-bar-ct1{
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+  flex-direction: row;
+}
+.logo-img-ct{
+  height: 5rem;
+  widows: 5rem;;
+
+}
+.logo-img-ct img{
+  object-fit: contain;
+  height: 100%;
+}
+.nav-link-ct-title{
+  display: flex;
+  align-items: center;
+}
+.nav-link-ct-title h1{
+  color: rgb(51, 51, 51);
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+.Home{
+
+}
+.form-control mr-sm-2{
+  border: 2px solid red !important;
+}
+.navbar{
+  background-color: #2d394b;
 }
