@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import gsap from "gsap";
+import Modal from "./Modal";
+import Post from "./Post";
 import "./Posts.css";
 
 export default function Posts() {
@@ -8,6 +10,11 @@ export default function Posts() {
     const postRefs = useRef(new Map());
     const url = "http://localhost:8080/api/post";
     const navigate = useNavigate();
+
+
+    const [showModal, setShowModal] = useState(false);
+    const [selectedPostId, setSelectedPostId] = useState(null);
+
 
     //fetch data
     useEffect(() => {
@@ -56,6 +63,16 @@ export default function Posts() {
         }
     };
 
+
+    const handleOpenModal = (postId) => {
+        setSelectedPostId(postId);
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        setSelectedPostId(null);
+
     const formatDateTime = (dateTimeString) => {
         const date = new Date(dateTimeString);
         return date.toLocaleString('en-US', {
@@ -66,6 +83,7 @@ export default function Posts() {
             minute: '2-digit',
             hour12: true
         });
+
     };
 
     return (
@@ -77,15 +95,25 @@ export default function Posts() {
                 <div className="row">
                     {posts.map(post => (
                         <div key={post.id} className="col-lg-4 mb-4" ref={el => postRefs.current.set(post.id, el)} >
+
                             <div className="card">
-                                <div className="card-bod">
+                                <div className="card-bod" onClick={() => handleOpenModal(post.id)} style={{ cursor: 'pointer' }}>
                                     <h5 className="card-title">{post.found ? "FOUND" : "MISSING"} {post.animal.animal.toUpperCase()} </h5>
-                                    <div className="img-container">
-                                        <img src={post.url} alt={`This is a picture of a ${post.animal.animal}: ${post.animal.characteristic}`} />
-                                    </div>
+
                                     <p className="card-text">
-                                        <div className="img-container">
-                                        </div>
+                                    <div className="img-container">
+                                    </div>
+
+                                    <strong>Description: </strong>{post.description}<br />
+                                    <strong>Weight (lb): </strong>{post.size}<br />
+                                    <strong>Time Found: </strong>{post.dateTime}<br />
+                                    <strong>Gender: </strong>{post.gender}<br />
+                                    <strong>Contact {post.user.name} at: </strong>{post.user.phoneNumber} or {post.user.email}<br />
+                                </p>
+                            </div>
+
+                                    <p className="card-text">
+                  
                                         <strong>Name: </strong>{post.animal.name ? post.animal.name : "No Tag"}<br />
                                         <strong>Breed: </strong>{post.animal.breed ? post.animal.breed : "???"}<br />
                                         <strong>Description: </strong>{post.description.length > 20 ? post.description.substring(0, 20) + "..." : post.description}<br />
@@ -95,6 +123,7 @@ export default function Posts() {
                                         <strong><br />Stuff to add to modal:<br /> Weight (lb): </strong>{post.size} <br /> <strong>Gender: </strong>{post.gender}<br />
                                     </p>
                                 </div>
+
                                 <Link className="btn btn-primary btn-sm" to={`/posts/edit/${post.id}`}>Edit</Link>
                                 <button className='btn btn-danger btn-sm delete-btn' onClick={() => handleDelete(post.id)}>Delete</button>
                             </div>
@@ -102,6 +131,11 @@ export default function Posts() {
                     ))}
                 </div>
             </div>
+
+            <Modal show={showModal} onClose={handleCloseModal}>
+                {selectedPostId && <Post postId={selectedPostId} />}
+            </Modal>
+
         </>
     );
 }
