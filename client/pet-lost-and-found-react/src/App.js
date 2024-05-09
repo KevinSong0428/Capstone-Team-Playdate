@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import Posts from './Posts';
 import PostForm from './PostForm';
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                 <Route path="posts/edit/:id" element={<PostForm />} />
                 <Route path="/posts" element={<Posts />} />
             </Routes>
+            <Footer/>
         </Router>
     );
 }

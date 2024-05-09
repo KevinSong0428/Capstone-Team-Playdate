@@ -82,10 +82,9 @@ export default function Posts() {
                 <div className="row">
                     {posts.map(post => (
                         <div key={post.id} className="col-lg-4 mb-4" ref={el => postRefs.current.set(post.id, el)} >
-                            <div className="card">
-                                <div className="card-bod">
+                                <div className="card">                                <div className="card-bod" onClick={() => handleOpenModal(post.id)} style={{ cursor: 'pointer' }}>
                                     <h5 className="card-title">{post.found ? "FOUND" : "LOST"}: {post.animal.name} </h5>
-                                    <div className="img-container">
+                                    <div className="img-container" >
                                         <img src={post.url} alt={`This is a picture of a ${post.animal.animal}: ${post.animal.characteristic}`} />
                                     </div>
                                     <p className="card-text">
@@ -101,15 +100,15 @@ export default function Posts() {
                                 </div>
                                 <Link className="btn btn-primary btn-sm" to={`/posts/edit/${post.id}`}>Edit</Link>
                                 <button className='btn btn-danger btn-sm delete-btn' onClick={() => handleDelete(post.id)}>Delete</button>
-                                <button className="btn btn-info btn-sm" onClick={() => handleOpenModal(post.id)}>View Details</button>
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
-            <Modal show={showModal} onClose={handleCloseModal}>
-                {selectedPostId && <Post postId={selectedPostId} />}
-            </Modal>
+
+        <Modal show={showModal} onClose={handleCloseModal}>
+            {selectedPostId && <Post postId={selectedPostId} />}
+        </Modal>
 
         </>
     );
