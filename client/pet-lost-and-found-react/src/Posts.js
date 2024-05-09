@@ -5,81 +5,90 @@ import Modal from "./Modal";
 import Post from "./Post";
 import "./Posts.css";
 
-export default function Posts() {
-  const [posts, setPosts] = useState([]);
-  const postRefs = useRef(new Map());
-  const url = "http://localhost:8080/api/post";
+export default function Posts({ searchTerm }) {
+    const [posts, setPosts] = useState([]);
+    const postRefs = useRef(new Map());
+    const url = "http://localhost:8080/api/post";
 
-  const [showModal, setShowModal] = useState(false);
-  const [selectedPostId, setSelectedPostId] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedPostId, setSelectedPostId] = useState(null);
 
-  //fetch data
-  useEffect(() => {
-    fetch(url)
-      .then((response) => {
-        if (response.status === 200) {
-          return response.json();
-        } else {
-          return Promise.reject(`Unexpected status code: ${response.status}`);
-        }
-      })
-      .then((data) => setPosts(data)) // here we are setting our data to our state variable
-      .catch(console.log);
-  }, []);
+    //fetch data
+    useEffect(() => {
+        fetch(url)
+            .then((response) => {
+                if (response.status === 200) {
+                    return response.json();
+                } else {
+                    return Promise.reject(`Unexpected status code: ${response.status}`);
+                }
+            })
+            .then((data) => setPosts(data)) // here we are setting our data to our state variable
+            .catch(console.log);
+    }, []);
 
-  const handleDelete = (postId) => {
-    const post = posts.find((post) => post.id === postId);
-    console.log("post to delelete: ===>", post);
+    useEffect(() => {
+        const filteredPosts = posts.filter(post =>
+            (post.animal.name && post.animal.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
+            (post.animal.breed && post.animal.breed.toLowerCase().includes(searchTerm.toLowerCase()))
+        );
+        setPosts(filteredPosts);
+    }, [searchTerm]);
 
-    if (post && window.confirm(`Delete Post: ${post.animal.name}`)) {
-      const element = postRefs.current.get(postId);
-      console.log(".....element to animate", element);
-      if (element) {
-        gsap.to(element, {
-          duration: 0.5,
-          opacity: 0,
-          x: -100,
-          ease: "power1.inOut",
-          onComplete: () => {
-            setPosts((prevPosts) =>
-              prevPosts.filter((post) => post.id !== postId)
-            );
-          },
-        });
-        const init = { method: "DELETE" };
-        fetch(`${url}/${postId}`, init)
-          .then((response) => {
-            if (response.status === 204) {
-              // This is handled by the onComplete of the animation
-            } else {
-              throw new Error(`Unexpected Status Code: ${response.status}`);
+
+    const handleDelete = (postId) => {
+        const post = posts.find((post) => post.id === postId);
+        console.log("post to delelete: ===>", post);
+
+        if (post && window.confirm(`Delete Post: ${post.animal.name}`)) {
+            const element = postRefs.current.get(postId);
+            console.log(".....element to animate", element);
+            if (element) {
+                gsap.to(element, {
+                    duration: 0.5,
+                    opacity: 0,
+                    x: -100,
+                    ease: "power1.inOut",
+                    onComplete: () => {
+                        setPosts((prevPosts) =>
+                            prevPosts.filter((post) => post.id !== postId)
+                        );
+                    },
+                });
+                const init = { method: "DELETE" };
+                fetch(`${url}/${postId}`, init)
+                    .then((response) => {
+                        if (response.status === 204) {
+                            // This is handled by the onComplete of the animation
+                        } else {
+                            throw new Error(`Unexpected Status Code: ${response.status}`);
+                        }
+                    })
+                    .catch(console.error);
             }
-          })
-          .catch(console.error);
-      }
-    }
-  };
+        }
+    };
 
-  const handleOpenModal = (postId) => {
-    setSelectedPostId(postId);
-    setShowModal(true);
-  };
+    const handleOpenModal = (postId) => {
+        setSelectedPostId(postId);
+        setShowModal(true);
+    };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-    setSelectedPostId(null);
-  };
-  const formatDateTime = (dateTimeString) => {
-    const date = new Date(dateTimeString);
-    return date.toLocaleString("en-US", {
-      month: "long",
-      day: "2-digit",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-    });
-  };
+    const handleCloseModal = () => {
+        setShowModal(false);
+        setSelectedPostId(null);
+    };
+    const formatDateTime = (dateTimeString) => {
+        const date = new Date(dateTimeString);
+        return date.toLocaleString("en-US", {
+            month: "long",
+            day: "2-digit",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+        });
+    };
 
   return (
     <>
@@ -135,32 +144,19 @@ export default function Posts() {
                     {post.user.email}
                     <br />
                   </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
-                <div className='button-container mb-4'>
-                  <Link
-                    className='edit btn btn-primary btn-sm'
-                    to={`/posts/edit/${post.id}`}
-                  >
-                    Edit
-                  </Link>
-                  <button
-                    className='delete btn btn-danger btn-sm delete-btn'
-                    onClick={() => handleDelete(post.id)}
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
+                <Modal
+                    show={showModal}
+                    onClose={handleCloseModal}
+                >
+                    {selectedPostId && <Post postId={selectedPostId} />}
+                </Modal>
             </div>
-          ))}
-        </div>
-        <Modal
-          show={showModal}
-          onClose={handleCloseModal}
-        >
-          {selectedPostId && <Post postId={selectedPostId} />}
-        </Modal>
-      </div>
-    </>
-  );
+        </>
+    );
 }
