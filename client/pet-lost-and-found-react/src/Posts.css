@@ -46,7 +46,17 @@
   margin-left: 27px;
   width: 6rem;
 }
+.edit-post-btn{
+ border: 1px solid #b2e8f9;
+ background-color: #b2e8f9;;
+}
 .delete {
   margin-right: 20px;
   width: 6rem;
+
+}
+.delete-post-btn{
+  border: 1px solid #2d394b;
+  background-color:#2d394b;
+  color: white;
 }
