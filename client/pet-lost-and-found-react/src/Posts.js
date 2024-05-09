@@ -63,6 +63,7 @@ export default function Posts() {
         }
     };
 
+
     const handleOpenModal = (postId) => {
         setSelectedPostId(postId);
         setShowModal(true);
@@ -71,6 +72,18 @@ export default function Posts() {
     const handleCloseModal = () => {
         setShowModal(false);
         setSelectedPostId(null);
+
+    const formatDateTime = (dateTimeString) => {
+        const date = new Date(dateTimeString);
+        return date.toLocaleString('en-US', {
+            month: 'long',
+            day: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+        });
+
     };
 
     return (
@@ -82,12 +95,12 @@ export default function Posts() {
                 <div className="row">
                     {posts.map(post => (
                         <div key={post.id} className="col-lg-4 mb-4" ref={el => postRefs.current.set(post.id, el)} >
-                            <div className="card">                                <div className="card-bod" onClick={() => handleOpenModal(post.id)} style={{ cursor: 'pointer' }}>
-                                <h5 className="card-title">{post.found ? "FOUND" : "LOST"}: {post.animal.name} </h5>
-                                <div className="img-container" >
-                                    <img src={post.url} alt={`This is a picture of a ${post.animal.animal}: ${post.animal.characteristic}`} />
-                                </div>
-                                <p className="card-text">
+
+                            <div className="card">
+                                <div className="card-bod" onClick={() => handleOpenModal(post.id)} style={{ cursor: 'pointer' }}>
+                                    <h5 className="card-title">{post.found ? "FOUND" : "MISSING"} {post.animal.animal.toUpperCase()} </h5>
+
+                                    <p className="card-text">
                                     <div className="img-container">
                                     </div>
 
@@ -98,6 +111,19 @@ export default function Posts() {
                                     <strong>Contact {post.user.name} at: </strong>{post.user.phoneNumber} or {post.user.email}<br />
                                 </p>
                             </div>
+
+                                    <p className="card-text">
+                  
+                                        <strong>Name: </strong>{post.animal.name ? post.animal.name : "No Tag"}<br />
+                                        <strong>Breed: </strong>{post.animal.breed ? post.animal.breed : "???"}<br />
+                                        <strong>Description: </strong>{post.description.length > 20 ? post.description.substring(0, 20) + "..." : post.description}<br />
+                                        <strong>Time Found: </strong>{formatDateTime(post.dateTime)}<br />
+                                        <strong>Contact {post.user.name} at: </strong><br />{post.user.phoneNumber} <br />{post.user.email}<br />
+
+                                        <strong><br />Stuff to add to modal:<br /> Weight (lb): </strong>{post.size} <br /> <strong>Gender: </strong>{post.gender}<br />
+                                    </p>
+                                </div>
+
                                 <Link className="btn btn-primary btn-sm" to={`/posts/edit/${post.id}`}>Edit</Link>
                                 <button className='btn btn-danger btn-sm delete-btn' onClick={() => handleDelete(post.id)}>Delete</button>
                             </div>
