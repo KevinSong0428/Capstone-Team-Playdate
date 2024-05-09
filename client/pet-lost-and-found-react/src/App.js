@@ -20,7 +20,7 @@ function App() {
         <Router>
             <Navbar onSearch={handleSearch} />
             <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Home searchTerm={searchTerm} />} />
                 <Route path="posts/add" element={<PostForm />} />
                 <Route path="posts/edit/:id" element={<PostForm />} />
                 <Route path="/posts" element={<Posts searchTerm={searchTerm} />} />

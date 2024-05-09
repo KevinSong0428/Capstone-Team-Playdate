@@ -21,7 +21,7 @@ function Footer() {
                         </a>
                         <a href="https://github.com/vxg026" target="_blank">
                             <div className="git-hub-container">
-                                <i class="fa-brands fa-linkedin"></i>
+                                <i className="fa-brands fa-linkedin"></i>
                                 <h6>vanessa-gonzalez-82667a1b3/</h6>
                             </div>
                         </a>
@@ -32,15 +32,15 @@ function Footer() {
                         <div>
                             Kevin Song
                         </div>
-                        <a href="https://github.com/vxg026" target="_blank">
+                        <a href="https://github.com/KevinSong0428" target="_blank">
                             <div className="git-hub-container">
                                 <i className="fa-brands fa-github"></i>
                                 <h6>KevinSong0428</h6>
                             </div>
                         </a>
-                        <a href="https://github.com/vxg026" target="_blank">
+                        <a href="https://www.linkedin.com/in/kevinsong0428/" target="_blank">
                             <div className="git-hub-container">
-                                <i class="fa-brands fa-linkedin"></i>
+                                <i className="fa-brands fa-linkedin"></i>
                                 <h6>LinkedInKevinSong</h6>
                             </div>
                         </a>
@@ -51,7 +51,7 @@ function Footer() {
                         <div>
                             Brandon Lee
                         </div>
-                        <a href="https://github.com/vxg026" target="_blank">
+                        <a href="https://github.com/BrandonW-Lee" target="_blank">
                             <div className="git-hub-container">
                                 <i className="fa-brands fa-github"></i>
                                 <h6>BrandonLee</h6>
@@ -59,7 +59,7 @@ function Footer() {
                         </a>
                         <a href="https://github.com/vxg026" target="_blank">
                             <div className="git-hub-container">
-                                <i class="fa-brands fa-linkedin"></i>
+                                <i className="fa-brands fa-linkedin"></i>
                                 <h6>LinkedInBrandonLee</h6>
                             </div>
                         </a>
