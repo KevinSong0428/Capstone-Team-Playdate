@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useState } from 'react';
 import Home from './Home';
 import { BrowserRouter as Router } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
@@ -10,17 +10,23 @@ import Footer from './Footer';
 import NotFound from './NotFound';
 
 function App() {
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const handleSearch = (term) => {
+        setSearchTerm(term);
+    }
+
     return (
         <Router>
-            <Navbar/>
+            <Navbar onSearch={handleSearch} />
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="posts/add" element={<PostForm />} />
                 <Route path="posts/edit/:id" element={<PostForm />} />
-                <Route path="/posts" element={<Posts />} />
-                <Route path="*" element={<NotFound/>}/>
+                <Route path="/posts" element={<Posts searchTerm={searchTerm} />} />
+                <Route path="*" element={<NotFound />} />
             </Routes>
-            <Footer/>
+            <Footer />
         </Router>
     );
 }
