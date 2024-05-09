@@ -11,6 +11,7 @@
 }
 
 .modal-content {
+    position: relative;
     background: white;
     padding: 20px;
     border-radius: 5px;
@@ -90,13 +91,20 @@
 
 }
 .modal-card button{
+    position: absolute;
+    top: 10px;   
+    right: 10px;
     background-color: white;
+    border: none;
+    font-size: large;
+    width: fit-content;
+    /* background-color: white;
     border: none;
     font-size: large;
     width: fit-content;
     position: relative;
     left: .1rem;
-    bottom: 71.3rem;
+    bottom: 71.3rem; */
 
 }
 #modal {
