@@ -47,7 +47,6 @@ export default function Posts() {
             );
           },
         });
-<<<<<<< HEAD
         const init = { method: "DELETE" };
         fetch(`${url}/${postId}`, init)
           .then((response) => {
@@ -162,52 +161,4 @@ export default function Posts() {
       </div>
     </>
   );
-=======
-
-    };
-
-    return (
-        <>
-            <div className="container mt-5">
-                <div className="row">
-                    <h2 className="flex-grow">All Posts</h2>
-                </div>
-                <div className="row">
-                    {posts.map(post => (
-                        <div key={post.id} className="col-lg-4 mb-4" ref={el => postRefs.current.set(post.id, el)} >
-
-                            <div className="card">
-                                <div className="card-bod" onClick={() => handleOpenModal(post.id)} style={{ cursor: 'pointer' }}>
-                                    <h5 className="card-title">{post.found ? "FOUND" : "MISSING"} {post.animal.animal.toUpperCase()} </h5>
-
-                            </div>
-
-                                    <p className="card-text">
-
-                                        <strong>Name: </strong>{post.animal.name ? post.animal.name : "No Tag"}<br />
-                                        <strong>Breed: </strong>{post.animal.breed ? post.animal.breed : "???"}<br />
-                                        <strong>Description: </strong>{post.description.length > 20 ? post.description.substring(0, 20) + "..." : post.description}<br />
-                                        <strong>Time Found: </strong>{formatDateTime(post.dateTime)}<br />
-                                        <strong>Contact {post.user.name} at: </strong><br />{post.user.phoneNumber} <br />{post.user.email}<br />
-
-                                        <strong><br />Stuff to add to modal:<br /> Weight (lb): </strong>{post.size} <br /> <strong>Gender: </strong>{post.gender}<br />
-                                    </p>
-                                </div>
-
-                                <Link className="btn btn-primary btn-sm" to={`/posts/edit/${post.id}`}>Edit</Link>
-                                <button className='btn btn-danger btn-sm delete-btn' onClick={() => handleDelete(post.id)}>Delete</button>
-                            </div>
-         </div>
-                <Modal show={showModal} onClose={handleCloseModal}>
-                {selectedPostId && <Post postId={selectedPostId} />}
-            </Modal>
-            </div>
-                    ))}
-
-
-                        
-
-        </>
-    );
->>>>>>> adc720ed397691f69d2d454f10482a3304fb68d9
 }
