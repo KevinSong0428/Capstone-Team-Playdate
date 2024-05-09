@@ -129,7 +129,6 @@ export default function Posts() {
                                         <br />
                                     </p>
                                 </div>
-                            </div>
                             <Link
                                 className='btn btn-primary btn-sm'
                                 to={`/posts/edit/${post.id}`}
@@ -142,6 +141,7 @@ export default function Posts() {
                             >
                                 Delete
                             </button>
+                            </div>
                         </div>
                     ))}
                 </div>
