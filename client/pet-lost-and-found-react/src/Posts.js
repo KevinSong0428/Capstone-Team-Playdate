@@ -21,7 +21,9 @@ export default function Posts({ searchTerm }) {
                 if (response.status === 200) {
                     return response.json();
                 } else {
-                    return Promise.reject(`Unexpected status code: ${response.status}`);
+                    return Promise.reject(
+                        `Unexpected status code: ${response.status}`
+                    );
                 }
             })
             .then((data) => setPosts(data)) // here we are setting our data to our state variable
@@ -30,18 +32,22 @@ export default function Posts({ searchTerm }) {
 
     useEffect(() => {
         if (posts.length > 0) {
-            const filteredPosts = posts.filter(post => {
+            const filteredPosts = posts.filter((post) => {
                 return (
-                    (post.animal.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
-                    (post.animal.breed.toLowerCase().includes(searchTerm.toLowerCase())) ||
-                    (post.animal.animal.toLowerCase().includes(searchTerm.toLowerCase()))
+                    post.animal.name
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase()) ||
+                    post.animal.breed
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase()) ||
+                    post.animal.animal
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase())
                 );
             });
             setFilteredPosts(filteredPosts);
         }
-    }, [searchTerm, posts])
-
-
+    }, [searchTerm, posts]);
 
     const handleDelete = (postId) => {
         const post = posts.find((post) => post.id === postId);
@@ -66,7 +72,9 @@ export default function Posts({ searchTerm }) {
                         if (response.status === 204) {
                             // This is handled by the onComplete of the animation
                         } else {
-                            throw new Error(`Unexpected Status Code: ${response.status}`);
+                            throw new Error(
+                                `Unexpected Status Code: ${response.status}`
+                            );
                         }
                     })
                     .catch(console.error);
@@ -127,20 +135,27 @@ export default function Posts({ searchTerm }) {
                                 </div>
                                 <p className='card-text'>
                                     <strong>Name: </strong>
-                                    {post.animal.name ? post.animal.name : "No Tag"}
+                                    {post.animal.name
+                                        ? post.animal.name
+                                        : "No Tag"}
                                     <br />
                                     <strong>Breed: </strong>
-                                    {post.animal.breed ? post.animal.breed : "???"}
+                                    {post.animal.breed
+                                        ? post.animal.breed
+                                        : "???"}
                                     <br />
                                     <strong>Description: </strong>
                                     {post.description.length > 20
-                                        ? post.description.substring(0, 20) + "..."
+                                        ? post.description.substring(0, 20) +
+                                          "..."
                                         : post.description}
                                     <br />
                                     <strong>Time Found: </strong>
                                     {formatDateTime(post.dateTime)}
                                     <br />
-                                    <strong>Contact {post.user.name} at: </strong>
+                                    <strong>
+                                        Contact {post.user.name} at:{" "}
+                                    </strong>
                                     <br />
                                     {post.user.phoneNumber} <br />
                                     {post.user.email}
@@ -165,22 +180,30 @@ export default function Posts({ searchTerm }) {
                     </div>
                 ))}
             </div>
-        )
-    }
+        );
+    };
 
     return (
         <>
-            <div className='container mt-2'>
-                <div className='row justify-content-center'>
-                    <h2 className='flex-grow' style={{ color: "black !important" }}>All Posts</h2>
-                </div>
-                {searchTerm ? displayPost(filteredPosts) : displayPost(posts)}
-                <Modal
-                    show={showModal}
-                    onClose={handleCloseModal}
+            <div className='home-container'>
+                <h2
+                    className='flex-grow d-flex justify-content-center mt-2'
+                    style={{ color: "black", textAlign: "center" }}
                 >
-                    {selectedPostId && <Post postId={selectedPostId} />}
-                </Modal>
+                    All Posts
+                </h2>
+                <div className='container mt-2'>
+                    <div className='row justify-content-center'></div>
+                    {searchTerm
+                        ? displayPost(filteredPosts)
+                        : displayPost(posts)}
+                    <Modal
+                        show={showModal}
+                        onClose={handleCloseModal}
+                    >
+                        {selectedPostId && <Post postId={selectedPostId} />}
+                    </Modal>
+                </div>
             </div>
         </>
     );
