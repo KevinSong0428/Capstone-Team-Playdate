@@ -1,0 +1,117 @@
+/* body{display:flex;align-items:center;justify-content:center;min-height:100vh;}
+
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 30px;
+  text-align: center;
+}
+
+h3 {
+  font-size: 24px;
+} */
+.box-intro{
+    display: flex;
+    background-color: #718fab;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    padding-bottom: 6rem;
+    justify-self: center;
+
+    /* margin: 0;
+    padding: 0;
+    width:100%; */
+}
+.box-intro h1{
+    font-size: 5rem;
+    font-family: "Poetsen One", sans-serif;
+    margin-top: 2rem;
+}
+.container-intro-page{
+    margin:0 !important;
+    padding: 0 !important;
+    width: 100%;
+    height: 100%;
+    background-color: #718fab;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+}
+.intro-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+.intro-details h3{
+    font-size: 2rem;
+    font-family: "Poetsen One", sans-serif;
+}
+.intro-img-ct{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-bottom: 2rem;
+    padding-top: 3rem;
+}
+.intro-img-ct img{
+    object-fit: contain;
+    width: 100%;;
+
+}
+.card-intro-img{
+    background-color: white;
+    border: 1rem solid white;
+    padding-bottom: 4rem solid white;
+    border-radius: 1rem;
+    width: 50%;
+}
+.bottom-ct{
+    background-color: white;
+    height: 40vh;
+}
+.bottom-ct{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    /* height: 100%; */
+    /* background-image; */
+
+}
+/* .bottom-ct h3{
+    font-family: "Poetsen One", sans-serif;
+} */
+.bottom-ct-txt h3{
+    font-family: "Poetsen One", sans-serif;
+    font-size: 2.5rem;
+}
+.bottom-ct-txt{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 2rem;
+    align-items: center;
+
+}
+.intro-btns-ct{
+    display: flex;
+    padding-top: 2rem;
+    /* background-image: url("https://img.freepik.com/free-vector/cute-playful-footprint-pattern-background-fauna-fun_1017-44713.jpg?w=2000&t=st=1715287512~exp=1715288112~hmac=e0f17f3203f19f445fdff94ee264da4f281784aed09f45f1246f242c6a0768ed"); */
+
+}
+.btn-browse{
+    background-color: #b2e8f9;
+    color: black;
+    border: 2px solid #b2e8f9;
+    font-family: "Poetsen One", sans-serif;
+    border-radius: 1px solid  #b2e8f9;
+}

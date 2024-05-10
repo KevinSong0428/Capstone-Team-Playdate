@@ -105,6 +105,7 @@ export default function Posts({ searchTerm }) {
     };
 
     const displayPost = (postArg) => {
+        {postArg.sort((a, b)=> b.id-a.id)}
         return (
             <div className='row'>
                 {postArg.map((post) => (
@@ -164,13 +165,13 @@ export default function Posts({ searchTerm }) {
                             </div>
                             <div className='button-container mb-4'>
                                 <Link
-                                    className='edit btn btn-primary btn-sm'
+                                    className='edit btn btn-primary btn-sm edit-post-btn'
                                     to={`/posts/edit/${post.id}`}
                                 >
                                     Edit
                                 </Link>
                                 <button
-                                    className='delete btn btn-danger btn-sm delete-btn'
+                                    className='delete btn btn-danger btn-sm delete-btn delete-post-btn'
                                     onClick={() => handleDelete(post.id)}
                                 >
                                     Delete

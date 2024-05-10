@@ -8,7 +8,7 @@ export default function Home({ searchTerm }) {
     let elems = useRef([]);
     let timeline = gsap.timeline({
         defaults: {
-            duration: 0.75,
+            duration: 0.9,
             ease: "power3.inOut",
         },
         paused: true,
@@ -18,17 +18,17 @@ export default function Home({ searchTerm }) {
         {
             title: "Save an animal",
             cover:
-                "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZG9nfGVufDB8fDB8fHww",
+                "https://ahs.nyc3.cdn.digitaloceanspaces.com/live/public/styles/scale_width_960/public/media/image/2021-06/dog-wearing-collar-tilting-head-16_9.jpg?itok=RUrP_DQa",
         },
         {
             title: "Report lost pets",
             cover:
-                "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGRvZ3xlbnwwfHwwfHx8MA%3D%3D",
+                "https://reginahumanesociety.ca/app/uploads/2021/01/FoundPet.jpg",
         },
         {
             title: "Help a neighbor",
             cover:
-                "https://images.unsplash.com/photo-1551969014-7d2c4cddf0b6?q=80&w=2115&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                "https://cdn.discordapp.com/attachments/1167573430388924557/1238269053437607978/Screenshot_2024-05-09_at_4.18.25_PM.png?ex=663eab6c&is=663d59ec&hm=bf3f4da6eab0c0fc2c56ffc18cc5e0df2b35878ee9e339d03cb80d61380eb21b&",
         },
         {
             title: "Be a friend",
@@ -163,4 +163,3 @@ export default function Home({ searchTerm }) {
         </div>
     );
 }
-
