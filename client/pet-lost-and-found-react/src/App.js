@@ -8,6 +8,7 @@ import PostForm from './PostForm';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import NotFound from './NotFound';
+import Intro from './Intro';
 
 function App() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -20,11 +21,12 @@ function App() {
         <Router>
             <Navbar onSearch={handleSearch} />
             <Routes>
-                <Route path="/" element={<Home searchTerm={searchTerm} />} />
+                <Route path="/" element={<Intro/>}/>
+                <Route path="/posts" element={<Home searchTerm={searchTerm} />} />
                 <Route path="posts/add" element={<PostForm />} />
                 <Route path="posts/edit/:id" element={<PostForm />} />
-                <Route path="/posts" element={<Posts searchTerm={searchTerm} />} />
                 <Route path="*" element={<NotFound />} />
+
             </Routes>
             <Footer />
         </Router>

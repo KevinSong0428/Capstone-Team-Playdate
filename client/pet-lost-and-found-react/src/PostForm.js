@@ -133,6 +133,9 @@ function PostForm() {
                     }`
                 );
             }
+            else if (response.status === 204) {
+                return null;
+            }
             console.log(response);
 
             const data = await response.json();
@@ -172,7 +175,9 @@ function PostForm() {
                     }`
                 );
             }
-
+            else if (response.status === 204) {
+                return null;
+            }
             const data = await response.json();
 
             if (!data.userId) {
@@ -212,7 +217,9 @@ function PostForm() {
                     } location: ${response.status}`
                 );
             }
-
+            else if (response.status === 204) {
+                return null;
+            }
             const data = await response.json();
 
             if (!data.locationId) {
@@ -250,11 +257,14 @@ function PostForm() {
                     `Failed to ${id ? "update" : "create"} post: ${response.status}`
                 );
             }
-
+            else if (response.status === 204) {
+                navigate("/posts");
+                return null;
+            }
             const data = await response.json();
 
             if (data.id) {
-                navigate("/");
+                navigate("/posts");
             } else {
                 setErrors(data);
             }

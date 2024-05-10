@@ -105,6 +105,7 @@ export default function Posts({ searchTerm }) {
     };
 
     const displayPost = (postArg) => {
+        {postArg.sort((a, b)=> b.id-a.id)}
         return (
             <div className='row'>
                 {postArg.map((post) => (
