@@ -1,0 +1,28 @@
+.card-bod img {
+    width: 50%;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.invalid {
+    border-color: red;
+}
+
+.card {
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-bod {
+    padding: 20px;
+}

@@ -1,0 +1,53 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.footer-div{
+    background-color: #61bad6;
+    background-color: #2d394b;
+    height: 10rem;
+    /* margin-top: 2rem; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+}
+.footer-div button{
+    background-color: #b2e8f9;;
+    border: 1px solid #b2e8f9;
+}
+.footer-div h5{
+    color:white;
+    margin-top: 1rem;
+}
+.fa-brands{
+    color: #b2e8f9;
+}
+.all-contacts{
+    /* border: 2px solid red; */
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+.contact1{
+    /* border: 2px solid red; */
+    color:white;
+
+}
+.git-hub-container{
+    /* border: 2px solid red; */
+    display: flex;
+    gap: 1rem;
+}
+a {
+    text-decoration: none;
+    color: white;
+}

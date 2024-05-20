@@ -1,0 +1,29 @@
+GET http://localhost:8080/api/location
+
+###
+GET http://localhost:8080/api/location/2
+
+###
+GET http://localhost:8080/api/location/222
+
+###
+POST http://localhost:8080/api/location
+Content-Type: application/json
+
+{
+    "address": "686 Palm Avenue",
+    "city": "Palm Springs",
+    "state":  "CA",
+    "zipCode": "88888"
+}
+
+###
+POST http://localhost:8080/api/location
+Content-Type: application/json
+
+{
+    "address": "",
+    "city": "Palm Springs",
+    "state":  "CA",
+    "zipCode": "88888"
+}
